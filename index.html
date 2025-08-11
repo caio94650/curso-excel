@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Curso de Excel – do Básico ao Avançado</title>
+<meta name="description" content="Aprenda Excel de forma prática: planilhas, funções, gráficos, dashboards e automações. Aulas objetivas, material de apoio e certificado de conclusão.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f5f6f8; --card:#ffffff; --text:#1f2937; --muted:#6b7280;
+    --brand:#16a34a; --brand-600:#22c55e; --border:#e5e7eb; --max:1000px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
+  img{max-width:100%;height:auto}
+  a{color:inherit}
+  .wrap{max-width:var(--max);margin:0 auto;padding:16px}
+  header{background:var(--card);border-bottom:1px solid var(--border)}
+  .brand{display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 0}
+  .logo{width:36px;height:36px;border-radius:8px;background:#e8f5ee;display:grid;place-items:center;font-weight:800;color:#0e7a35}
+  .brand-name{font-weight:800}
+  .title{margin:8px 0 2px;text-align:center;font-weight:800;letter-spacing:-.2px;font-size:clamp(22px,3.2vw,34px)}
+  .title .accent{color:var(--brand)}
+  .sub{margin:0;text-align:center;color:var(--muted);font-size:15px}
+  /* hero */
+  .hero{background:var(--card)}
+  .hero-card{padding:18px}
+  .hero-illustration{
+    border:1px solid var(--border);border-radius:12px;background:#fff;display:grid;place-items:center;
+    aspect-ratio:16/9; /* leve e mobile-friendly */
+  }
+  /* badges */
+  .badges{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+  .badge{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
+  .icon{font-size:22px;display:block;margin-bottom:6px}
+  /* sections */
+  .section{background:var(--card);border-top:1px solid var(--border)}
+  .inner{padding:22px}
+  .cols{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
+  .muted{color:var(--muted)}
+  .check{list-style:none;padding:0;margin:14px 0 0}
+  .check li{position:relative;padding-left:26px;margin:10px 0}
+  .check li::before{
+    content:"";position:absolute;left:0;top:5px;width:18px;height:18px;border-radius:50%;
+    border:2px solid var(--brand);background:conic-gradient(var(--brand) 0 100%, transparent 0);
+  }
+  /* modules */
+  .modules{max-width:780px;margin:0 auto}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .pill{background:#f0fdf4;border:1px solid #bbf7d0;color:#065f46;border-radius:999px;padding:10px 14px}
+  /* who */
+  .who{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+  /* cta */
+  .cta{
+    display:block;text-align:center;background:var(--brand);color:#fff;text-decoration:none;
+    padding:16px 20px;border-radius:12px;font-weight:800;border:1px solid #17b457;
+    margin:18px auto 0;max-width:420px;transition:.2s transform;
+  }
+  .cta:hover{transform:translateY(-1px);background:var(--brand-600)}
+  /* footer */
+  .footer{background:var(--card);border-top:1px solid var(--border);padding:22px 16px;color:var(--muted);font-size:13px}
+  .footer a{color:inherit;text-decoration:underline}
+  /* responsive */
+  @media (max-width:900px){
+    .badges{grid-template-columns:repeat(2,1fr)}
+    .cols,.who{grid-template-columns:1fr}
+  }
+  @media (max-width:420px){
+    .wrap{padding:12px}
+    .hero-card{padding:12px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">Ex</div>
+      <div class="brand-name">Expert Cursos</div>
+    </div>
+    <h1 class="title">Curso de <span class="accent">Excel</span> – claro, direto e prático</h1>
+    <p class="sub">Do básico ao avançado com exercícios guiados e material de apoio</p>
+  </div>
+</header>
+
+<main>
+  <!-- HERO ILUSTRAÇÃO + BENEFÍCIOS -->
+  <section class="hero">
+    <div class="wrap hero-card">
+      <div class="hero-illustration" role="img" aria-label="Ilustração do Excel">
+        <!-- SVG leve (sem imagens externas) -->
+        <svg width="140" height="140" viewBox="0 0 48 48" aria-hidden="true">
+          <rect x="10" y="6" width="28" height="36" rx="4" fill="#e6f7ec" stroke="#16a34a"/>
+          <rect x="14" y="14" width="20" height="4" fill="#16a34a"/>
+          <rect x="14" y="22" width="20" height="4" fill="#16a34a" opacity=".8"/>
+          <rect x="14" y="30" width="12" height="4" fill="#16a34a" opacity=".6"/>
+          <text x="36" y="39" font-size="8" text-anchor="end" fill="#0e7a35">X</text>
+        </svg>
+      </div>
+
+      <div class="badges" aria-label="Diferenciais do curso">
+        <div class="badge"><span class="icon">🎓</span><strong>Certificado</strong><div class="muted">de conclusão</div></div>
+        <div class="badge"><span class="icon">📚</span><strong>Conteúdo</strong><div class="muted">do básico ao avançado</div></div>
+        <div class="badge"><span class="icon">💬</span><strong>Suporte</strong><div class="muted">para dúvidas</div></div>
+        <div class="badge"><span class="icon">📱</span><strong>Multiplataforma</strong><div class="muted">acesso em qualquer dispositivo</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE O CURSO -->
+  <section class="section">
+    <div class="wrap inner cols">
+      <div>
+        <h2 style="margin:0 0 10px">Aprenda Excel de forma objetiva</h2>
+        <p>Você vai evoluir por passos claros, praticando com exemplos reais: planilhas, funções, gráficos, dashboards e automações. O conteúdo é organizado para quem está começando e para quem precisa consolidar o uso profissional do Excel.</p>
+        <ul class="check">
+          <li>Aulas curtas e sequenciais</li>
+          <li>Arquivos para acompanhar a prática</li>
+          <li>Atividades guiadas para fixação</li>
+          <li>Certificado de conclusão</li>
+        </ul>
+      </div>
+      <div>
+        <p class="muted">Acesso online, no seu ritmo, com possibilidade de revisar quando quiser.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTEÚDO/MÓDULOS -->
+  <section class="section">
+    <div class="wrap inner modules">
+      <h2 style="margin:0 0 6px">Conteúdo programático</h2>
+      <p class="muted" style="margin:0 0 16px">Principais temas abordados</p>
+      <div class="grid-2">
+        <div class="pill">Interface e formatação</div>
+        <div class="pill">Organização de planilhas e tabelas</div>
+        <div class="pill">Funções essenciais (SOMA, MÉDIA, SE…)</div>
+        <div class="pill">Validação e formatação condicional</div>
+        <div class="pill">Gráficos e indicadores</div>
+        <div class="pill">Tabelas e gráficos dinâmicos</div>
+        <div class="pill">Power Query (noções)</div>
+        <div class="pill">Macros e automações (noções)</div>
+        <div class="pill">Dashboards</div>
+        <div class="pill">Boas práticas de impressão</div>
+      </div>
+
+      <!-- SUBSTITUA O HREF PELO LINK DA SUA PÁGINA/OFERTA -->
+      <a class="cta" href="#" rel="noopener">Quero saber mais</a>
+    </div>
+  </section>
+
+  <!-- PARA QUEM É -->
+  <section class="section">
+    <div class="wrap inner who">
+      <div>
+        <h2 style="margin:0 0 10px">Para quem é</h2>
+        <p>Estudantes, profissionais e empreendedores que desejam organizar dados, criar relatórios claros e ganhar agilidade na tomada de decisão. Não é necessário conhecimento prévio.</p>
+        <p class="muted">Ideal para quem atua em áreas administrativas, finanças, vendas, marketing, logística e projetos.</p>
+      </div>
+      <div>
+        <ul class="check" aria-label="Resultados de aprendizagem">
+          <li>Construir planilhas bem estruturadas</li>
+          <li>Aplicar funções para resolver problemas do dia a dia</li>
+          <li>Criar gráficos e painéis informativos</li>
+          <li>Melhorar a produtividade no trabalho</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;align-items:center">
+    <div>© <span id="y"></span> Expert Cursos. Todos os direitos reservados.</div>
+    <nav style="display:flex;gap:12px">
+      <a href="#" rel="nofollow">Termos de Uso</a>
+      <a href="#" rel="nofollow">Política de Privacidade</a>
+      <a href="#" rel="nofollow">Contato</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
