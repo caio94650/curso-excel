@@ -3,132 +3,195 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Avaliador Premiado – Demo</title>
+  <title>Avaliador Premiado – Demo Ética (Material)</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f8fafc;
+      --primary:#1976d2; /* azul material */
+      --primary-600:#1565c0;
+      --bg:#f5f5f5;
       --card:#ffffff;
-      --muted:#6b7280;
-      --text:#1f2937;
-      --brand:#1f9389;   /* teal suave */
-      --brand-2:#8ee3d6; /* menta clara */
-      --shadow:0 4px 14px rgba(0,0,0,.06);
+      --text:#212121;
+      --muted:#616161;
+      --border:#e0e0e0;
       --radius:12px;
+      --shadow:0 6px 24px rgba(0,0,0,.08);
     }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text)}
-    .wrap{min-height:100vh;display:grid;place-items:center;padding:20px}
-    .app{width:100%;max-width:480px;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;border:1px solid #eceff3}
-    .demo-banner{background:#f1f9f8;color:#0f766e;padding:8px 12px;font-size:12.5px;text-align:center;border-bottom:1px solid #e6f4f2}
-    header{display:flex;gap:12px;align-items:center;padding:16px;border-bottom:1px solid #eceff3}
-    .logo{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#073b3a;font-weight:700;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
-    h1{font-size:18px;margin:0}
-    .sub{font-size:13px;color:var(--muted)}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Roboto,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+    .app{max-width:480px;margin:auto;min-height:100vh;background:var(--card);display:flex;flex-direction:column}
+    header{background:var(--primary);color:#fff;padding:16px 20px;font-weight:500;display:flex;align-items:center;gap:10px}
+    header .brand{width:28px;height:28px;border-radius:50%;background:#fff1;display:inline-grid;place-items:center;font-weight:700}
+    .demo{background:#e3f2fd;color:#0d47a1;padding:10px 14px;font-size:12.5px;border-bottom:1px solid #bbdefb}
 
-    .progress{padding:0 16px 12px}
-    .bar{height:10px;background:#f1f5f9;border-radius:999px;overflow:hidden}
-    .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand-2));transition:width .35s ease}
-    .stats{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12.5px;color:var(--muted)}
-    .balance{font-weight:700;color:var(--brand)}
+    .progress{height:4px;background:#e0e0e0}
+    .progress-bar{height:4px;background:var(--primary);width:0%;transition:width .3s ease}
 
-    .card{padding:0 16px 16px}
-    .question{background:#fbfcfd;border:1px solid #eceff3;border-radius:12px;padding:16px}
-    .qtext{font-size:16px;line-height:1.5;margin:0}
-    .choices{display:grid;gap:10px;margin-top:14px}
-    .btn{appearance:none;border:none;cursor:pointer;border-radius:10px;padding:12px 14px;background:#fff;color:var(--text);text-align:left;font-weight:600;border:1px solid #e7ebf0;transition:background .2s ease,border-color .2s ease}
-    .btn:hover{background:#f7fdfa;border-color:#cdeee7}
+    main{flex:1;padding:20px}
+    .question{font-size:16px;margin-bottom:16px}
+    .options{display:grid;gap:10px}
+    .option{border:1px solid var(--border);border-radius:10px;padding:12px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .2s,border-color .2s}
+    .option:hover{background:#fafafa;border-color:#d6d6d6}
+    .radio{width:18px;height:18px;border-radius:50%;border:2px solid #bdbdbd;display:inline-block;position:relative;flex-shrink:0}
+    .radio.checked{border-color:var(--primary)}
+    .radio.checked::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--primary)}
 
-    .toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(30px);background:#f0fdf9;border:1px solid #d7f6ef;color:#0f766e;padding:9px 12px;border-radius:999px;font-size:13.5px;opacity:0;pointer-events:none;transition:opacity .25s ease, transform .25s ease}
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .balance{margin-top:10px;text-align:right;font-size:13px;color:var(--muted)}
+    .actions{margin-top:16px;display:flex;justify-content:flex-end}
+    .btn{background:var(--primary);color:#fff;border:none;border-radius:8px;padding:12px 16px;font-weight:600;cursor:pointer}
+    .btn:hover{background:var(--primary-600)}
 
-    .final{display:none;padding:0 16px 20px}
-    .final .box{background:#fbfcfd;border:1px solid #eceff3;border-radius:12px;padding:18px;text-align:center}
-    .final h2{margin:0 0 6px 0;font-size:20px}
-    .big{font-size:30px;font-weight:800;color:var(--brand)}
-    .note{font-size:12.5px;color:var(--muted);margin-top:6px}
-    .cta{display:grid;gap:10px;margin-top:16px}
-    .cta .link{display:block;text-align:center;text-decoration:none;font-weight:700;border-radius:10px;padding:12px 14px;border:1px solid #e7ebf0}
-    .primary{background:var(--brand);color:#ffffff;border:none}
-    .ghost{background:#fff;color:var(--text)}
+    .view{display:none}
+    .view.active{display:block}
 
-    footer{padding:12px 16px;border-top:1px solid #eceff3;font-size:11.5px;color:var(--muted);text-align:center}
-    footer a{color:var(--brand);text-decoration:none}
+    .final{text-align:center;padding:10px}
+    .final h2{margin:0 0 6px}
+    .final .score{font-size:28px;font-weight:800;color:var(--primary)}
+
+    .center{display:grid;place-items:center}
+    .loading{padding:40px;color:var(--muted);text-align:center}
+    .spinner{width:36px;height:36px;border-radius:50%;border:4px solid #e0e0e0;border-top-color:var(--primary);animation:spin 1s linear infinite;margin:8px auto 0}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    .card{border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+    .note{font-size:13px;color:var(--muted);margin-top:6px}
+
+    footer{padding:14px 16px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);text-align:center}
+    footer a{color:var(--primary);text-decoration:none}
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <div class="app" id="app">
-      <div class="demo-banner">Este é um <b>MODO DEMONSTRAÇÃO</b> com pontos virtuais.</div>
-      <header>
-        <div class="logo">AP</div>
-        <div>
-          <h1>Avaliador Premiado</h1>
-          <div class="sub">Responda e acumule pontos</div>
-        </div>
-      </header>
+  <div class="app" id="app">
+    <header><div class="brand">AP</div> Avaliador Premiado</header>
+    <div class="demo">Modo demonstração: pontos virtuais sem valor monetário.</div>
+    <div class="progress"><div class="progress-bar" id="bar"></div></div>
 
-      <div class="progress">
-        <div class="bar"><i id="pg"></i></div>
-        <div class="stats">
-          <div><span id="stepNow">1</span>/<span id="stepTotal">10</span> perguntas</div>
-          <div class="balance">Saldo: <span id="saldo">0</span> pts</div>
+    <!-- VIEW: QUIZ -->
+    <main id="view-quiz" class="view active">
+      <div class="question" id="qtext">Carregando...</div>
+      <div class="options" id="options"></div>
+      <div class="balance">Saldo: <b id="saldo">0</b> pts</div>
+    </main>
+
+    <!-- VIEW: FINAL -->
+    <main id="view-final" class="view center">
+      <div class="card final">
+        <h2>Concluído! 🎉</h2>
+        <div class="score" id="finalScore">0 pts</div>
+        <p class="note">Obrigado por participar. Este é um ambiente de demonstração.</p>
+        <div class="actions">
+          <button class="btn" id="btnSaque">Realizar saque</button>
         </div>
       </div>
+    </main>
 
-      <main class="card">
-        <section class="question" id="qbox">
-          <p class="qtext" id="qtext">Carregando...</p>
-          <div class="choices" id="choices"></div>
-        </section>
+    <!-- VIEW: SAQUE (simula página separada) -->
+    <main id="view-saque" class="view center">
+      <div id="saque-loading" class="loading">
+        Processando solicitação de saque...
+        <div class="spinner"></div>
+      </div>
+      <div id="saque-msg" class="card" style="display:none">
+        <h3>Informação importante</h3>
+        <p>Este é um <b>modo demonstração</b>. Não há saque em dinheiro. Se você procura benefícios reais, oferecemos conteúdos, cupons e sorteios exclusivos para participantes.</p>
+        <p class="note">Transparência primeiro: nada de taxas escondidas ou promessas falsas. 😉</p>
+        <div class="actions">
+          <a href="#" id="cta1" class="btn" style="text-decoration:none">Receber materiais</a>
+        </div>
+      </div>
+    </main>
 
-        <section class="final" id="final">
-          <div class="box">
-            <h2>Concluído! 🎉</h2>
-            <div class="big" id="finalScore">0 pts</div>
-            <div class="note">Modo demonstração. Pontos sem valor monetário.</div>
-            <div class="cta">
-              <a class="link primary" id="ctaPrimary" href="#">Receber novidades</a>
-              <a class="link ghost" id="ctaSecondary" href="#">Falar no WhatsApp</a>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer>© <span id="year"></span> Avaliador Premiado</footer>
-    </div>
+    <footer>© <span id="year"></span> Avaliador Premiado — Demo ética. <a href="#">Saiba mais</a></footer>
   </div>
 
-  <div class="toast" id="toast">+20 pts adicionados</div>
-
   <script>
-    const TOTAL = 10;
-    const MIN_PTS = 10;
-    const MAX_PTS = 40;
-    const QUESTIONS = [
-      { t: "Com que frequência faz compras online?", a: ["Quase todo dia", "1-3 vezes/semana", "1-3 vezes/mês", "Raramente"] },
-      { t: "Você usa banco digital?", a: ["Sim, principal", "Sim, secundário", "Não uso", "Prefiro agência"] },
-      { t: "Qual formato de conteúdo mais consome?", a: ["Vídeos curtos", "Lives", "Artigos/Blogs", "Podcasts"] },
-      { t: "Ao escolher um produto, o que pesa mais?", a: ["Preço", "Avaliações", "Marca", "Prazo de entrega"] },
-      { t: "Costuma usar cupons de desconto?", a: ["Sempre", "Às vezes", "Raramente", "Nunca"] },
-      { t: "Qual rede social mais usa?", a: ["Instagram", "TikTok", "Facebook", "YouTube"] },
-      { t: "Já pagou por curso online?", a: ["Mais de um", "Um", "Não, mas quero", "Não quero"] },
-      { t: "Forma de pagamento preferida?", a: ["Pix", "Cartão", "Boleto", "Carteiras digitais"] },
-      { t: "Objetivo financeiro atual?", a: ["Quitar dívidas", "Investir", "Aumentar renda", "Viajar"] },
-      { t: "Com que frequência avalia produtos comprados?", a: ["Sempre", "Às vezes", "Raramente", "Nunca"] },
+    // ===== Perguntas (10) =====
+    const perguntas = [
+      'Com que frequência você faz compras online?',
+      'Você usa aplicativo de banco digital?',
+      'Qual formato de conteúdo você mais consome?',
+      'Ao escolher um produto, o que pesa mais?',
+      'Você costuma usar cupons de desconto?',
+      'Qual rede social você usa com mais frequência?',
+      'Você já pagou por um curso online?',
+      'Como você prefere pagar suas compras?',
+      'Qual seu principal objetivo financeiro hoje?',
+      'Com que frequência você avalia produtos que compra?'
     ];
-    let step=0, saldo=0;
-    const $=sel=>document.querySelector(sel);
-    const randInt=(min,max)=>Math.floor(Math.random()*(max-min+1))+min;
-    const awardPoints=()=>randInt(MIN_PTS,MAX_PTS);
-    const showToast=msg=>{const el=$('#toast');el.textContent=msg;el.classList.add('show');clearTimeout(showToast._t);showToast._t=setTimeout(()=>el.classList.remove('show'),1500)};
-    const updateProgress=()=>{$('#pg').style.width=((step)/TOTAL)*100+'%';$('#stepNow').textContent=Math.min(step+1,TOTAL);$('#saldo').textContent=saldo};
-    const renderQuestion=()=>{if(step>=TOTAL)return;const q=QUESTIONS[step];$('#qtext').textContent=q.t;const c=$('#choices');c.innerHTML='';q.a.forEach(opt=>{const b=document.createElement('button');b.className='btn';b.type='button';b.textContent=opt;b.onclick=()=>onAnswer();c.appendChild(b)});updateProgress()};
-    const onAnswer=()=>{const pts=awardPoints();saldo+=pts;showToast('+'+pts+' pts adicionados');step++;if(step>=TOTAL)finish();else setTimeout(renderQuestion,250);updateProgress()};
-    const finish=()=>{$('#finalScore').textContent=saldo+' pts';$('#qbox').style.display='none';$('#final').style.display='block';$('#pg').style.width='100%';$('#stepNow').textContent=TOTAL;$('#saldo').textContent=saldo;$('#year').textContent=new Date().getFullYear();};
-    (function(){document.getElementById('year').textContent=new Date().getFullYear();document.getElementById('stepTotal').textContent=TOTAL;renderQuestion();})();
+    const opcoes = ['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4'];
+
+    // ===== Estado =====
+    let passo = 0;
+    let saldo = 0;
+
+    // ===== Util =====
+    const $ = id => document.getElementById(id);
+    const setView = (name) => {
+      ['quiz','final','saque'].forEach(v => {
+        const el = document.getElementById('view-' + v);
+        if (el) el.classList.toggle('active', v===name);
+      });
+    };
+    const randInt = (min,max)=> Math.floor(Math.random()*(max-min+1))+min;
+
+    function renderPergunta(){
+      if(passo < perguntas.length){
+        $('bar').style.width = ((passo / perguntas.length) * 100) + '%';
+        $('qtext').textContent = perguntas[passo];
+        const box = $('options');
+        box.innerHTML = '';
+        opcoes.forEach((txt,i)=>{
+          const row = document.createElement('div');
+          row.className = 'option';
+          const radio = document.createElement('span');
+          radio.className = 'radio';
+          const label = document.createElement('span');
+          label.textContent = txt;
+          row.appendChild(radio);
+          row.appendChild(label);
+          row.onclick = ()=> responder(i,row);
+          box.appendChild(row);
+        });
+      } else {
+        $('bar').style.width = '100%';
+        $('finalScore').textContent = saldo + ' pts';
+        setView('final');
+      }
+    }
+
+    function responder(i,row){
+      // marca visual
+      document.querySelectorAll('.option .radio').forEach(r=>r.classList.remove('checked'));
+      row.querySelector('.radio').classList.add('checked');
+      // pontuação aleatória entre 10 e 40 pts
+      const ganho = randInt(10,40);
+      saldo += ganho;
+      $('saldo').textContent = saldo;
+      // avança
+      passo++;
+      setTimeout(renderPergunta, 220);
+    }
+
+    function realizarSaque(){
+      setView('saque');
+      // simula "carregando" e exibe aviso transparente
+      setTimeout(()=>{
+        document.getElementById('saque-loading').style.display='none';
+        document.getElementById('saque-msg').style.display='block';
+      }, 1600);
+    }
+
+    // init
+    (function(){
+      document.getElementById('year').textContent = new Date().getFullYear();
+      renderPergunta();
+      // botão de saque
+      document.getElementById('btnSaque').addEventListener('click', realizarSaque);
+      // saldo inicial
+      $('saldo').textContent = saldo;
+    })();
   </script>
 </body>
 </html>
