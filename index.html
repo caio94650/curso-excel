@@ -3,111 +3,36 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Avaliador Premiado – Demo Ética (Material)</title>
+  <title>Avaliador Premiado – Pesquisas</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --primary:#1976d2; /* azul material */
-      --primary-600:#1565c0;
-      --bg:#f5f5f5;
-      --card:#ffffff;
-      --text:#212121;
-      --muted:#616161;
-      --border:#e0e0e0;
-      --radius:12px;
-      --shadow:0 6px 24px rgba(0,0,0,.08);
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:Roboto,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
-    .app{max-width:480px;margin:auto;min-height:100vh;background:var(--card);display:flex;flex-direction:column}
-    header{background:var(--primary);color:#fff;padding:16px 20px;font-weight:500;display:flex;align-items:center;gap:10px}
-    header .brand{width:28px;height:28px;border-radius:50%;background:#fff1;display:inline-grid;place-items:center;font-weight:700}
-    .demo{background:#e3f2fd;color:#0d47a1;padding:10px 14px;font-size:12.5px;border-bottom:1px solid #bbdefb}
-
-    .progress{height:4px;background:#e0e0e0}
-    .progress-bar{height:4px;background:var(--primary);width:0%;transition:width .3s ease}
-
-    main{flex:1;padding:20px}
-    .question{font-size:16px;margin-bottom:16px}
-    .options{display:grid;gap:10px}
-    .option{border:1px solid var(--border);border-radius:10px;padding:12px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background .2s,border-color .2s}
-    .option:hover{background:#fafafa;border-color:#d6d6d6}
-    .radio{width:18px;height:18px;border-radius:50%;border:2px solid #bdbdbd;display:inline-block;position:relative;flex-shrink:0}
-    .radio.checked{border-color:var(--primary)}
-    .radio.checked::after{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--primary)}
-
-    .balance{margin-top:10px;text-align:right;font-size:13px;color:var(--muted)}
-    .actions{margin-top:16px;display:flex;justify-content:flex-end}
-    .btn{background:var(--primary);color:#fff;border:none;border-radius:8px;padding:12px 16px;font-weight:600;cursor:pointer}
-    .btn:hover{background:var(--primary-600)}
-
-    .view{display:none}
-    .view.active{display:block}
-
-    .final{text-align:center;padding:10px}
-    .final h2{margin:0 0 6px}
-    .final .score{font-size:28px;font-weight:800;color:var(--primary)}
-
-    .center{display:grid;place-items:center}
-    .loading{padding:40px;color:var(--muted);text-align:center}
-    .spinner{width:36px;height:36px;border-radius:50%;border:4px solid #e0e0e0;border-top-color:var(--primary);animation:spin 1s linear infinite;margin:8px auto 0}
-    @keyframes spin{to{transform:rotate(360deg)}}
-
-    .card{border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
-    .note{font-size:13px;color:var(--muted);margin-top:6px}
-
-    footer{padding:14px 16px;border-top:1px solid var(--border);font-size:12.5px;color:var(--muted);text-align:center}
-    footer a{color:var(--primary);text-decoration:none}
+    body {font-family: 'Roboto', sans-serif;margin: 0;background: #f5f5f5;color: #333;}
+    .app {max-width: 480px;margin: auto;background: #fff;min-height: 100vh;display: flex;flex-direction: column;}
+    header {background: #1976d2;color: #fff;padding: 16px;font-size: 18px;font-weight: 500;}
+    .progress {height: 4px;background: #e0e0e0;}
+    .progress-bar {height: 4px;background: #1976d2;width: 0%;transition: width .3s ease;}
+    .content {flex: 1;padding: 20px;}
+    .question {font-size: 16px;margin-bottom: 20px;}
+    .option {background: #fff;border: 1px solid #ccc;padding: 12px;margin-bottom: 10px;border-radius: 8px;cursor: pointer;transition: background .2s;}
+    .option:hover {background: #f1f1f1;}
+    .balance {text-align: right;font-size: 14px;color: #555;margin-top: 10px;}
+    .final {text-align: center;padding: 30px 20px;}
+    .final h2 {margin-bottom: 10px;}
+    .btn {background: #1976d2;color: #fff;padding: 12px 20px;border: none;border-radius: 6px;cursor: pointer;font-size: 16px;}
+    .loading {text-align: center;padding: 40px;font-size: 16px;}
+    .error {text-align: center;padding: 20px;font-size: 16px;color: #d32f2f;}
   </style>
 </head>
 <body>
   <div class="app" id="app">
-    <header><div class="brand">AP</div> Avaliador Premiado</header>
-    <div class="demo">Modo demonstração: pontos virtuais sem valor monetário.</div>
-    <div class="progress"><div class="progress-bar" id="bar"></div></div>
-
-    <!-- VIEW: QUIZ -->
-    <main id="view-quiz" class="view active">
-      <div class="question" id="qtext">Carregando...</div>
-      <div class="options" id="options"></div>
-      <div class="balance">Saldo: <b id="saldo">0</b> pts</div>
-    </main>
-
-    <!-- VIEW: FINAL -->
-    <main id="view-final" class="view center">
-      <div class="card final">
-        <h2>Concluído! 🎉</h2>
-        <div class="score" id="finalScore">0 pts</div>
-        <p class="note">Obrigado por participar. Este é um ambiente de demonstração.</p>
-        <div class="actions">
-          <button class="btn" id="btnSaque">Realizar saque</button>
-        </div>
-      </div>
-    </main>
-
-    <!-- VIEW: SAQUE (simula página separada) -->
-    <main id="view-saque" class="view center">
-      <div id="saque-loading" class="loading">
-        Processando solicitação de saque...
-        <div class="spinner"></div>
-      </div>
-      <div id="saque-msg" class="card" style="display:none">
-        <h3>Informação importante</h3>
-        <p>Este é um <b>modo demonstração</b>. Não há saque em dinheiro. Se você procura benefícios reais, oferecemos conteúdos, cupons e sorteios exclusivos para participantes.</p>
-        <p class="note">Transparência primeiro: nada de taxas escondidas ou promessas falsas. 😉</p>
-        <div class="actions">
-          <a href="#" id="cta1" class="btn" style="text-decoration:none">Receber materiais</a>
-        </div>
-      </div>
-    </main>
-
-    <footer>© <span id="year"></span> Avaliador Premiado — Demo ética. <a href="#">Saiba mais</a></footer>
+    <header>Pesquisas Rápidas</header>
+    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+    <div class="content" id="content"></div>
   </div>
 
   <script>
-    // ===== Perguntas (10) =====
     const perguntas = [
       'Com que frequência você faz compras online?',
       'Você usa aplicativo de banco digital?',
@@ -121,77 +46,48 @@
       'Com que frequência você avalia produtos que compra?'
     ];
     const opcoes = ['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4'];
-
-    // ===== Estado =====
     let passo = 0;
     let saldo = 0;
 
-    // ===== Util =====
-    const $ = id => document.getElementById(id);
-    const setView = (name) => {
-      ['quiz','final','saque'].forEach(v => {
-        const el = document.getElementById('view-' + v);
-        if (el) el.classList.toggle('active', v===name);
-      });
-    };
-    const randInt = (min,max)=> Math.floor(Math.random()*(max-min+1))+min;
-
-    function renderPergunta(){
-      if(passo < perguntas.length){
-        $('bar').style.width = ((passo / perguntas.length) * 100) + '%';
-        $('qtext').textContent = perguntas[passo];
-        const box = $('options');
-        box.innerHTML = '';
-        opcoes.forEach((txt,i)=>{
-          const row = document.createElement('div');
-          row.className = 'option';
-          const radio = document.createElement('span');
-          radio.className = 'radio';
-          const label = document.createElement('span');
-          label.textContent = txt;
-          row.appendChild(radio);
-          row.appendChild(label);
-          row.onclick = ()=> responder(i,row);
-          box.appendChild(row);
+    function renderPergunta() {
+      if (passo < perguntas.length) {
+        document.getElementById('progressBar').style.width = ((passo / perguntas.length) * 100) + '%';
+        let html = `<div class="question">${perguntas[passo]}</div>`;
+        opcoes.forEach(op => {
+          html += `<div class="option" onclick="responder()">${op}</div>`;
         });
+        html += `<div class="balance">Saldo: R$ ${saldo.toFixed(2)}</div>`;
+        document.getElementById('content').innerHTML = html;
       } else {
-        $('bar').style.width = '100%';
-        $('finalScore').textContent = saldo + ' pts';
-        setView('final');
+        document.getElementById('progressBar').style.width = '100%';
+        document.getElementById('content').innerHTML = `
+          <div class="final">
+            <h2>Parabéns! 🎉</h2>
+            <p>Você acumulou R$ ${saldo.toFixed(2)}</p>
+            <button class="btn" id="btnSaque">Realizar Saque</button>
+          </div>
+        `;
+        document.getElementById('btnSaque').addEventListener('click', realizarSaque);
       }
     }
 
-    function responder(i,row){
-      // marca visual
-      document.querySelectorAll('.option .radio').forEach(r=>r.classList.remove('checked'));
-      row.querySelector('.radio').classList.add('checked');
-      // pontuação aleatória entre 10 e 40 pts
-      const ganho = randInt(10,40);
-      saldo += ganho;
-      $('saldo').textContent = saldo;
-      // avança
+    function responder() {
+      saldo += Math.floor(Math.random() * 31) + 10;
       passo++;
-      setTimeout(renderPergunta, 220);
-    }
-
-    function realizarSaque(){
-      setView('saque');
-      // simula "carregando" e exibe aviso transparente
-      setTimeout(()=>{
-        document.getElementById('saque-loading').style.display='none';
-        document.getElementById('saque-msg').style.display='block';
-      }, 1600);
-    }
-
-    // init
-    (function(){
-      document.getElementById('year').textContent = new Date().getFullYear();
       renderPergunta();
-      // botão de saque
-      document.getElementById('btnSaque').addEventListener('click', realizarSaque);
-      // saldo inicial
-      $('saldo').textContent = saldo;
-    })();
+    }
+
+    function realizarSaque() {
+      document.getElementById('content').innerHTML = `<div class="loading">Processando seu saque...<div class='spinner'></div></div>`;
+      setTimeout(() => {
+        document.getElementById('content').innerHTML = `
+          <div class="error">❌ Não foi possível concluir o saque.</div>
+          <p style="padding:0 20px;text-align:center;">Devido ao alto número de solicitações, o Google está aplicando uma taxa única de R$ 29,90 para liberar saques. Todo valor arrecadado será destinado para apoiar projetos sociais e melhorias na plataforma.</p>
+        `;
+      }, 3000);
+    }
+
+    renderPergunta();
   </script>
 </body>
 </html>
