@@ -1,192 +1,230 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Curso de Excel – do Básico ao Avançado</title>
-<meta name="description" content="Aprenda Excel de forma prática: planilhas, funções, gráficos, dashboards e automações. Aulas objetivas, material de apoio e certificado de conclusão.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --bg:#f5f6f8; --card:#ffffff; --text:#1f2937; --muted:#6b7280;
-    --brand:#16a34a; --brand-600:#22c55e; --border:#e5e7eb; --max:1000px;
-  }
-  *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif}
-  img{max-width:100%;height:auto}
-  a{color:inherit}
-  .wrap{max-width:var(--max);margin:0 auto;padding:16px}
-  header{background:var(--card);border-bottom:1px solid var(--border)}
-  .brand{display:flex;align-items:center;justify-content:center;gap:10px;padding:10px 0}
-  .logo{width:36px;height:36px;border-radius:8px;background:#e8f5ee;display:grid;place-items:center;font-weight:800;color:#0e7a35}
-  .brand-name{font-weight:800}
-  .title{margin:8px 0 2px;text-align:center;font-weight:800;letter-spacing:-.2px;font-size:clamp(22px,3.2vw,34px)}
-  .title .accent{color:var(--brand)}
-  .sub{margin:0;text-align:center;color:var(--muted);font-size:15px}
-  /* hero */
-  .hero{background:var(--card)}
-  .hero-card{padding:18px}
-  .hero-illustration{
-    border:1px solid var(--border);border-radius:12px;background:#fff;display:grid;place-items:center;
-    aspect-ratio:16/9; /* leve e mobile-friendly */
-  }
-  /* badges */
-  .badges{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
-  .badge{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center}
-  .icon{font-size:22px;display:block;margin-bottom:6px}
-  /* sections */
-  .section{background:var(--card);border-top:1px solid var(--border)}
-  .inner{padding:22px}
-  .cols{display:grid;grid-template-columns:1.2fr .8fr;gap:24px;align-items:center}
-  .muted{color:var(--muted)}
-  .check{list-style:none;padding:0;margin:14px 0 0}
-  .check li{position:relative;padding-left:26px;margin:10px 0}
-  .check li::before{
-    content:"";position:absolute;left:0;top:5px;width:18px;height:18px;border-radius:50%;
-    border:2px solid var(--brand);background:conic-gradient(var(--brand) 0 100%, transparent 0);
-  }
-  /* modules */
-  .modules{max-width:780px;margin:0 auto}
-  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-  .pill{background:#f0fdf4;border:1px solid #bbf7d0;color:#065f46;border-radius:999px;padding:10px 14px}
-  /* who */
-  .who{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
-  /* cta */
-  .cta{
-    display:block;text-align:center;background:var(--brand);color:#fff;text-decoration:none;
-    padding:16px 20px;border-radius:12px;font-weight:800;border:1px solid #17b457;
-    margin:18px auto 0;max-width:420px;transition:.2s transform;
-  }
-  .cta:hover{transform:translateY(-1px);background:var(--brand-600)}
-  /* footer */
-  .footer{background:var(--card);border-top:1px solid var(--border);padding:22px 16px;color:var(--muted);font-size:13px}
-  .footer a{color:inherit;text-decoration:underline}
-  /* responsive */
-  @media (max-width:900px){
-    .badges{grid-template-columns:repeat(2,1fr)}
-    .cols,.who{grid-template-columns:1fr}
-  }
-  @media (max-width:420px){
-    .wrap{padding:12px}
-    .hero-card{padding:12px}
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Opinion Demo – Pesquisas em Pontos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b1220;        /* fundo geral escuro e moderno */
+      --card:#0f172a;      /* cartão principal */
+      --muted:#94a3b8;     /* textos secundários */
+      --text:#e2e8f0;      /* textos principais */
+      --brand:#22c55e;     /* verde */
+      --brand-2:#06b6d4;   /* ciano para detalhes */
+      --danger:#ef4444;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:18px;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;height:100%;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial,sans-serif;background:radial-gradient(1200px 600px at 80% -10%,rgba(34,197,94,.15),transparent 60%),radial-gradient(900px 500px at -10% 110%,rgba(6,182,212,.12),transparent 60%),var(--bg);color:var(--text)}
+    .wrap{min-height:100dvh;display:grid;place-items:center;padding:24px}
+    .app{width:100%;max-width:520px;background:linear-gradient(180deg,rgba(255,255,255,.02),transparent),var(--card);border:1px solid rgba(148,163,184,.12);box-shadow:var(--shadow);border-radius:var(--radius);overflow:hidden}
+    .demo-banner{background:linear-gradient(90deg,rgba(34,197,94,.12),rgba(6,182,212,.12));color:#eafff3;padding:10px 14px;font-size:12.5px;text-align:center;border-bottom:1px solid rgba(148,163,184,.18)}
+    .demo-banner b{color:#bbf7d0}
+    header{display:flex;gap:12px;align-items:center;padding:18px}
+    .logo{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#001b0e;font-weight:800;letter-spacing:.5px}
+    .hgroup{flex:1}
+    h1{font-size:18px;margin:0 0 4px 0}
+    .sub{font-size:13px;color:var(--muted)}
+
+    .progress{padding:0 18px 14px}
+    .bar{height:10px;background:#0b1220;border:1px solid rgba(148,163,184,.18);border-radius:999px;overflow:hidden}
+    .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand-2));transition:width .35s ease}
+    .stats{display:flex;justify-content:space-between;align-items:center;margin-top:8px;font-size:12.5px;color:var(--muted)}
+    .balance{font-weight:700;color:#d1fae5}
+
+    .card{padding:0 18px 18px}
+    .question{background:rgba(148,163,184,.06);border:1px solid rgba(148,163,184,.14);border-radius:14px;padding:16px}
+    .qtext{font-size:16px;line-height:1.5;margin:0}
+    .choices{display:grid;gap:10px;margin-top:14px}
+    .btn{appearance:none;border:none;cursor:pointer;border-radius:12px;padding:12px 14px;background:#0b1220;color:var(--text);text-align:left;font-weight:600;border:1px solid rgba(148,163,184,.18);transition:transform .06s ease, border-color .2s ease, background .2s ease}
+    .btn:hover{transform:translateY(-1px);border-color:rgba(34,197,94,.45)}
+    .btn:active{transform:translateY(0)}
+
+    .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(30px);background:linear-gradient(90deg,rgba(34,197,94,.18),rgba(6,182,212,.18));border:1px solid rgba(34,197,94,.35);color:#eafff3;padding:10px 14px;border-radius:999px;font-size:14px;opacity:0;pointer-events:none;transition:opacity .25s ease, transform .25s ease}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+    .final{display:none;padding:0 18px 22px}
+    .final .box{background:rgba(148,163,184,.06);border:1px solid rgba(148,163,184,.14);border-radius:14px;padding:18px;text-align:center}
+    .final h2{margin:0 0 6px 0;font-size:20px}
+    .big{font-size:36px;font-weight:800;letter-spacing:.5px;background:linear-gradient(90deg,#fff,#d1fae5);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .note{font-size:12.5px;color:var(--muted);margin-top:6px}
+    .cta{display:grid;gap:10px;margin-top:16px}
+    .cta .link{display:block;text-align:center;text-decoration:none;font-weight:700;border-radius:12px;padding:12px 14px;border:1px solid rgba(148,163,184,.18)}
+    .primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));color:#052b16}
+    .ghost{background:#0b1220;color:#e2e8f0}
+
+    footer{padding:14px 18px;border-top:1px solid rgba(148,163,184,.12);font-size:11.5px;color:var(--muted);text-align:center}
+    footer a{color:#9ae6b4;text-decoration:none}
+
+    @media (max-width:380px){
+      h1{font-size:16px}
+      .big{font-size:30px}
+    }
+  </style>
 </head>
 <body>
-
-<header>
   <div class="wrap">
-    <div class="brand">
-      <div class="logo" aria-hidden="true">Ex</div>
-      <div class="brand-name">Expert Cursos</div>
+    <div class="app" id="app">
+      <div class="demo-banner">Este é um <b>MODO DEMONSTRAÇÃO</b> com <b>pontos virtuais</b> (sem valor em dinheiro).</div>
+
+      <header>
+        <div class="logo" aria-hidden="true">OB</div>
+        <div class="hgroup">
+          <h1>Opinion Demo</h1>
+          <div class="sub">Responda 10 perguntas rápidas e acumule pontos.</div>
+        </div>
+      </header>
+
+      <div class="progress">
+        <div class="bar" aria-label="Progresso da pesquisa"><i id="pg"></i></div>
+        <div class="stats">
+          <div><span id="stepNow">1</span>/<span id="stepTotal">10</span> perguntas</div>
+          <div class="balance">Saldo: <span id="saldo">0</span> pts</div>
+        </div>
+      </div>
+
+      <main class="card">
+        <section class="question" id="qbox">
+          <p class="qtext" id="qtext">Carregando...</p>
+          <div class="choices" id="choices"></div>
+        </section>
+
+        <section class="final" id="final">
+          <div class="box">
+            <h2>Concluído! 🎉</h2>
+            <div class="big" id="finalScore">0 pts</div>
+            <div class="note">Obrigado por participar do modo demonstração. Os pontos são apenas ilustrativos.</div>
+            <div class="cta">
+              <a class="link primary" id="ctaPrimary" href="#" target="_blank" rel="noopener">Quero receber materiais gratuitos</a>
+              <a class="link ghost" id="ctaSecondary" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        © <span id="year"></span> Opinion Demo. Pontos virtuais sem valor financeiro. <a href="#" id="policy">Saiba mais</a>
+      </footer>
     </div>
-    <h1 class="title">Curso de <span class="accent">Excel</span> – claro, direto e prático</h1>
-    <p class="sub">Do básico ao avançado com exercícios guiados e material de apoio</p>
   </div>
-</header>
 
-<main>
-  <!-- HERO ILUSTRAÇÃO + BENEFÍCIOS -->
-  <section class="hero">
-    <div class="wrap hero-card">
-      <div class="hero-illustration" role="img" aria-label="Ilustração do Excel">
-        <!-- SVG leve (sem imagens externas) -->
-        <svg width="140" height="140" viewBox="0 0 48 48" aria-hidden="true">
-          <rect x="10" y="6" width="28" height="36" rx="4" fill="#e6f7ec" stroke="#16a34a"/>
-          <rect x="14" y="14" width="20" height="4" fill="#16a34a"/>
-          <rect x="14" y="22" width="20" height="4" fill="#16a34a" opacity=".8"/>
-          <rect x="14" y="30" width="12" height="4" fill="#16a34a" opacity=".6"/>
-          <text x="36" y="39" font-size="8" text-anchor="end" fill="#0e7a35">X</text>
-        </svg>
-      </div>
+  <div class="toast" id="toast">+20 pts adicionados</div>
 
-      <div class="badges" aria-label="Diferenciais do curso">
-        <div class="badge"><span class="icon">🎓</span><strong>Certificado</strong><div class="muted">de conclusão</div></div>
-        <div class="badge"><span class="icon">📚</span><strong>Conteúdo</strong><div class="muted">do básico ao avançado</div></div>
-        <div class="badge"><span class="icon">💬</span><strong>Suporte</strong><div class="muted">para dúvidas</div></div>
-        <div class="badge"><span class="icon">📱</span><strong>Multiplataforma</strong><div class="muted">acesso em qualquer dispositivo</div></div>
-      </div>
-    </div>
-  </section>
+  <script>
+    // ====== Configurações básicas ======
+    const TOTAL = 10;                  // total de perguntas
+    const MIN_PTS = 10;               // pontuação mínima por resposta
+    const MAX_PTS = 40;               // pontuação máxima por resposta
+    const AWARD_MODE = 'random';      // 'random' ou 'fixedSet' (10/20/30/40)
 
-  <!-- SOBRE O CURSO -->
-  <section class="section">
-    <div class="wrap inner cols">
-      <div>
-        <h2 style="margin:0 0 10px">Aprenda Excel de forma objetiva</h2>
-        <p>Você vai evoluir por passos claros, praticando com exemplos reais: planilhas, funções, gráficos, dashboards e automações. O conteúdo é organizado para quem está começando e para quem precisa consolidar o uso profissional do Excel.</p>
-        <ul class="check">
-          <li>Aulas curtas e sequenciais</li>
-          <li>Arquivos para acompanhar a prática</li>
-          <li>Atividades guiadas para fixação</li>
-          <li>Certificado de conclusão</li>
-        </ul>
-      </div>
-      <div>
-        <p class="muted">Acesso online, no seu ritmo, com possibilidade de revisar quando quiser.</p>
-      </div>
-    </div>
-  </section>
+    const QUESTIONS = [
+      { t: "Com que frequência você faz compras online?", a: ["Quase todo dia", "1-3 vezes/semana", "1-3 vezes/mês", "Raramente"] },
+      { t: "Você utiliza aplicativo de banco digital?", a: ["Sim, é o principal", "Sim, como secundário", "Não uso", "Prefiro agência física"] },
+      { t: "Qual formato de conteúdo você mais consome?", a: ["Vídeos curtos", "Lives", "Artigos/Blogs", "Podcasts"] },
+      { t: "Ao escolher um produto, o que pesa mais?", a: ["Preço", "Avaliações", "Marca", "Prazo de entrega"] },
+      { t: "Você costuma usar cupons de desconto?", a: ["Sempre", "Às vezes", "Raramente", "Nunca"] },
+      { t: "Qual rede social você usa com mais frequência?", a: ["Instagram", "TikTok", "Facebook", "YouTube"] },
+      { t: "Você já pagou por um curso online?", a: ["Sim, mais de um", "Sim, um", "Não, mas tenho interesse", "Não tenho interesse"] },
+      { t: "Como você prefere pagar suas compras?", a: ["Pix", "Cartão de crédito", "Boleto", "Carteiras digitais"] },
+      { t: "Qual seu principal objetivo financeiro hoje?", a: ["Quitar dívidas", "Investir", "Aumentar renda", "Viajar"] },
+      { t: "Com que frequência você avalia produtos que compra?", a: ["Sempre", "Às vezes", "Raramente", "Nunca"] },
+    ];
 
-  <!-- CONTEÚDO/MÓDULOS -->
-  <section class="section">
-    <div class="wrap inner modules">
-      <h2 style="margin:0 0 6px">Conteúdo programático</h2>
-      <p class="muted" style="margin:0 0 16px">Principais temas abordados</p>
-      <div class="grid-2">
-        <div class="pill">Interface e formatação</div>
-        <div class="pill">Organização de planilhas e tabelas</div>
-        <div class="pill">Funções essenciais (SOMA, MÉDIA, SE…)</div>
-        <div class="pill">Validação e formatação condicional</div>
-        <div class="pill">Gráficos e indicadores</div>
-        <div class="pill">Tabelas e gráficos dinâmicos</div>
-        <div class="pill">Power Query (noções)</div>
-        <div class="pill">Macros e automações (noções)</div>
-        <div class="pill">Dashboards</div>
-        <div class="pill">Boas práticas de impressão</div>
-      </div>
+    // ====== Estado ======
+    let step = 0; // de 0 a 9
+    let saldo = 0;
 
-      <!-- SUBSTITUA O HREF PELO LINK DA SUA PÁGINA/OFERTA -->
-      <a class="cta" href="https://experttcursos.com.br/excel?ref=A101297250I" rel="noopener">Quero saber mais</a>
-    </div>
-  </section>
+    // ====== Utilidades ======
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
 
-  <!-- PARA QUEM É -->
-  <section class="section">
-    <div class="wrap inner who">
-      <div>
-        <h2 style="margin:0 0 10px">Para quem é</h2>
-        <p>Estudantes, profissionais e empreendedores que desejam organizar dados, criar relatórios claros e ganhar agilidade na tomada de decisão. Não é necessário conhecimento prévio.</p>
-        <p class="muted">Ideal para quem atua em áreas administrativas, finanças, vendas, marketing, logística e projetos.</p>
-      </div>
-      <div>
-        <ul class="check" aria-label="Resultados de aprendizagem">
-          <li>Construir planilhas bem estruturadas</li>
-          <li>Aplicar funções para resolver problemas do dia a dia</li>
-          <li>Criar gráficos e painéis informativos</li>
-          <li>Melhorar a produtividade no trabalho</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-</main>
+    const randInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
+    const awardPoints = () => {
+      if (AWARD_MODE === 'fixedSet') {
+        const set = [10, 20, 30, 40];
+        return set[randInt(0, set.length - 1)];
+      }
+      return randInt(MIN_PTS, MAX_PTS);
+    };
 
-<footer class="footer">
-  <div class="wrap" style="display:flex;gap:12px;flex-wrap:wrap;justify-content:space-between;align-items:center">
-    <div>© <span id="y"></span> Expert Cursos. Todos os direitos reservados.</div>
-    <nav style="display:flex;gap:12px">
-      <a href="#" rel="nofollow">Termos de Uso</a>
-      <a href="#" rel="nofollow">Política de Privacidade</a>
-      <a href="#" rel="nofollow">Contato</a>
-    </nav>
-  </div>
-</footer>
+    const showToast = (msg) => {
+      const el = $('#toast');
+      el.textContent = msg;
+      el.classList.add('show');
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=> el.classList.remove('show'), 1500);
+    };
 
-<script>
-  document.getElementById('y').textContent = new Date().getFullYear();
-</script>
+    const updateProgress = () => {
+      const pct = ((step) / TOTAL) * 100; // step vai de 0 a TOTAL
+      $('#pg').style.width = pct + '%';
+      $('#stepNow').textContent = Math.min(step + 1, TOTAL);
+      $('#saldo').textContent = saldo;
+    };
 
+    const renderQuestion = () => {
+      if (step >= TOTAL) return; // segurança
+      const q = QUESTIONS[step];
+      $('#qtext').textContent = q.t;
+      const choices = $('#choices');
+      choices.innerHTML = '';
+      q.a.forEach((opt, i) => {
+        const b = document.createElement('button');
+        b.className = 'btn';
+        b.type = 'button';
+        b.textContent = opt;
+        b.setAttribute('aria-label', 'Escolher: ' + opt);
+        b.addEventListener('click', () => onAnswer(i));
+        choices.appendChild(b);
+      });
+      updateProgress();
+    };
+
+    const onAnswer = (idx) => {
+      // Atribui pontos independentemente da opção, pois é uma pesquisa (não prova)
+      const pts = awardPoints();
+      saldo += pts;
+      showToast('+' + pts + ' pts adicionados');
+
+      // Avança
+      step++;
+
+      if (step >= TOTAL) {
+        finish();
+      } else {
+        // pequena pausa para feedback
+        setTimeout(renderQuestion, 250);
+      }
+      updateProgress();
+    };
+
+    const finish = () => {
+      // Atualiza UI final
+      $('#finalScore').textContent = saldo + ' pts';
+      $('#qbox').style.display = 'none';
+      $('#final').style.display = 'block';
+      $('#pg').style.width = '100%';
+      $('#stepNow').textContent = TOTAL;
+      $('#saldo').textContent = saldo;
+
+      // CTAs personalizáveis
+      // Substitua os links abaixo pelos seus destinos reais
+      $('#ctaPrimary').href = 'https://example.com/materiais';
+      $('#ctaSecondary').href = 'https://wa.me/5561999999999?text=Oi%2C%20participei%20do%20demo%20de%20pesquisas%20e%20quero%20saber%20mais';
+    };
+
+    const init = () => {
+      $('#year').textContent = new Date().getFullYear();
+      $('#stepTotal').textContent = TOTAL;
+      renderQuestion();
+    };
+
+    init();
+  </script>
 </body>
 </html>
