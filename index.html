@@ -3,199 +3,183 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ofertas Selecionadas – Amazon (rápida e aprovada no Google Ads)</title>
-  <meta name="description" content="Página leve, responsiva e focada em conversão. Compare 5 ofertas selecionadas e veja o preço atualizado na Amazon.">
+  <title>Oferta Especial – Suplemento</title>
+  <meta name="description" content="Página leve, responsiva e focada em conversão com três ofertas (1, 3 e 6 frascos) e aviso de cookies compatível com Google Ads." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root{
-      --bg:#f7f8fb;--card:#ffffff;--text:#0f172a;--muted:#64748b;--line:#e5e7eb;--cta:#0ea5e9;--cta-2:#111827;--accent:#fde68a
+      --bg:#0b1020;          /* fundo topo escuro */
+      --bg2:#f7f8fb;         /* fundo da área de cards */
+      --card:#ffffff;        /* cor dos cards */
+      --text:#0f172a;        /* texto base */
+      --muted:#64748b;       /* texto secundário */
+      --brand:#0ea5e9;       /* cor de destaque (botões) */
+      --accent:#ffcb00;      /* fita "Best Value" */
+      --shadow:0 10px 30px rgba(0,0,0,.08);
+      --radius:22px;
     }
+
     *{box-sizing:border-box}
-    html,body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    a{color:inherit;text-decoration:none}
-    img{display:block;max-width:100%;height:auto}
+    body{margin:0;font-family:"Inter",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;color:var(--text);background:var(--bg2)}
 
-    .wrap{max-width:980px;margin:0 auto;padding:14px}
+    /* Hero */
+    .hero{background:var(--bg);color:#fff;padding:38px 18px 26px;text-align:center}
+    .hero h1{margin:0 auto;max-width:980px;font-size:32px;line-height:1.15;font-weight:800;letter-spacing:.2px}
+    .hero h2{margin:10px auto 0;max-width:820px;font-size:22px;font-weight:800;color:#7cc1ff}
 
-    header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:saturate(160%) blur(8px);border-bottom:1px solid var(--line);z-index:10}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 6px}
-    .brand{display:flex;gap:10px;align-items:center}
-    .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#111827,#475569);box-shadow:0 6px 18px rgba(2,6,23,.12)}
-    .brand h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.2px}
+    /* Grid de cards */
+    .wrap{max-width:1120px;margin:24px auto;padding:0 16px 48px}
+    .grid{display:grid;gap:18px}
+    @media(min-width:900px){.grid{grid-template-columns:1fr 1.1fr 1fr;}}
 
-    .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;align-items:center;padding:16px 6px}
-    .hero-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 8px 24px rgba(2,6,23,.05)}
-    .hero h2{margin:0 0 6px;font-size:22px;line-height:1.2}
-    .hero p{margin:0;color:var(--muted);font-size:14px}
-    .hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
-    .badge{font-size:12px;background:#f1f5f9;border:1px solid var(--line);border-radius:999px;padding:6px 10px}
+    .card{position:relative;background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px 18px 18px;border:1px solid #edf0f4;display:flex;flex-direction:column;align-items:center}
+    .ribbon{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);color:#222;padding:8px 18px;border-radius:999px;font-weight:800;font-size:14px;box-shadow:0 10px 20px rgba(255,203,0,.35)}
+    .title{font-size:26px;font-weight:800;margin:8px 0 6px}
+    .subtitle{color:var(--muted);font-weight:600}
 
-    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .12s ease, box-shadow .12s ease}
-    .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(2,6,23,.08)}
-    .thumb{background:#fff;display:flex;align-items:center;justify-content:center;height:160px}
-    @media(min-width:860px){.thumb{height:190px}}
-    .thumb img{max-height:100%;object-fit:contain}
-    .body{padding:14px;display:flex;flex-direction:column;gap:8px}
-    .title{font-weight:700;font-size:15px;line-height:1.35}
-    .meta{font-size:13px;color:var(--muted)}
-    .stars{display:inline-flex;gap:2px;align-items:center;font-size:12px;color:#f59e0b}
-    .actions{display:flex;gap:10px;margin-top:6px}
-    .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;padding:12px;border-radius:12px;background:var(--cta);color:#fff;font-weight:700;border:0}
-    .btn.secondary{background:var(--cta-2)}
+    .bottles{margin:14px 0}
+    .bottles img{height:120px;max-width:100%}
 
-    .cta-wide{margin:16px 6px 4px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(135deg,#eff6ff,#e0f2fe);border:1px solid var(--line);border-radius:16px;padding:14px}
-    .cta-wide strong{font-size:14px}
+    .price{margin:10px 0 2px;font-size:34px;font-weight:800}
+    .per{color:var(--muted);font-size:14px;margin-bottom:12px}
 
-    .disclaimer{margin:14px 6px;color:var(--muted);font-size:12px}
-    footer{margin:22px 0 12px;color:var(--muted);font-size:12px;text-align:center}
+    .cta{appearance:none;border:none;background:var(--brand);color:#fff;font-weight:800;font-size:16px;padding:14px 18px;border-radius:14px;cursor:pointer;width:100%;max-width:340px;box-shadow:0 8px 18px rgba(14,165,233,.35);transition:transform .06s ease}
+    .cta:hover{transform:translateY(-1px)}
 
-    @media (max-width:820px){
-      .hero{grid-template-columns:1fr}
-      .grid{grid-template-columns:1fr}
+    .badges{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:14px;color:#111}
+    .badge{background:#f4f7fb;border:1px dashed #d7dee9;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:600}
+
+    .trust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin:26px 0 0;color:#111}
+    .trust img{height:24px;opacity:.9}
+
+    /* Cookie bar (modal) */
+    .cookie{position:fixed;inset:0;background:rgba(15,23,42,.58);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+    .cookie__box{background:#fff;border-radius:16px;max-width:680px;width:min(92vw,680px);padding:18px 18px 14px;box-shadow:var(--shadow)}
+    .cookie__box h3{margin:6px 0 6px;font-size:18px}
+    .cookie__box p{margin:0 0 12px;color:#374151;font-size:14px}
+    .cookie__actions{display:flex;gap:10px;justify-content:flex-end}
+    .btn{border:1px solid #e5e7eb;background:#fff;color:#111;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer}
+    .btn--primary{background:var(--brand);color:#fff;border-color:var(--brand)}
+
+    /* Footer mini */
+    footer{max-width:1120px;margin:18px auto 42px;padding:0 16px;color:#6b7280;font-size:12px;text-align:center}
+
+    /* Mobile tweaks */
+    @media(max-width:899px){
+      .hero h1{font-size:26px}
+      .hero h2{font-size:18px}
+      .bottles img{height:100px}
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="wrap nav">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <h1>Ofertas Selecionadas</h1>
-      </div>
-      <div style="font-size:12px;color:var(--muted)">Página informativa • Links de afiliado Amazon</div>
-    </div>
+  <header class="hero">
+    <h1>SECURE Your Discounted Offer Now</h1>
+    <h2>WHILE STOCK LAST</h2>
   </header>
 
   <main class="wrap">
-    <section class="hero" aria-labelledby="tit-hero">
-      <div class="hero-card">
-        <h2 id="tit-hero">5 ofertas confiáveis, prontas para comprar agora</h2>
-        <p>Layout limpo, rápido e pensado para clique. Compare e veja o preço atualizado na Amazon.</p>
-        <div class="hero-badges">
-          <span class="badge">Entrega rápida*</span>
-          <span class="badge">Avaliações reais</span>
-          <span class="badge">Pagamento seguro</span>
+    <section class="grid">
+      <!-- Card 1 -->
+      <article class="card">
+        <div class="title">Try One</div>
+        <div class="subtitle">30 Days • 1 Bottle</div>
+        <div class="bottles"><img src="https://images.unsplash.com/photo-1604908177076-9bcf6e5f2f8f?q=80&w=600&auto=format&fit=crop" alt="1 bottle" loading="lazy"></div>
+        <div class="price">$59</div>
+        <div class="per">+ shipping</div>
+        <a class="cta" href="#" id="btn-1">Add to Cart</a>
+        <div class="badges">
+          <span class="badge">30-Day Supply</span>
+          <span class="badge">Visa / Master / Pix</span>
         </div>
-      </div>
-      <div class="hero-card" aria-hidden="true">
-        <div class="stars" title="Avaliações">
-          ★★★★★ <span style="color:var(--muted);margin-left:6px">Média 4.6/5</span>
+      </article>
+
+      <!-- Card 2 (Best Value) -->
+      <article class="card" style="border-width:2px">
+        <span class="ribbon">Best Value</span>
+        <div class="title">Best Value</div>
+        <div class="subtitle">6 bottles • 180 Day Supply</div>
+        <div class="bottles"><img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?q=80&w=900&auto=format&fit=crop" alt="6 bottles" loading="lazy"></div>
+        <div class="price">$234</div>
+        <div class="per">$39 per bottle • Free shipping</div>
+        <a class="cta" href="#" id="btn-2">Get the Best Deal</a>
+        <div class="badges">
+          <span class="badge">180-Day Guarantee</span>
+          <span class="badge">Secure Checkout</span>
+          <span class="badge">Most Popular</span>
         </div>
-        <p class="meta" style="margin-top:8px">Dica: use o botão “Ver oferta” para abrir diretamente na Amazon e conferir preço e frete da sua região.</p>
-      </div>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="card">
+        <div class="title">Popular</div>
+        <div class="subtitle">3 bottles • 90 Day Supply</div>
+        <div class="bottles"><img src="https://images.unsplash.com/photo-1615634260167-c3f9b5b7d0fd?q=80&w=700&auto=format&fit=crop" alt="3 bottles" loading="lazy"></div>
+        <div class="price">$147</div>
+        <div class="per">$49 per bottle • Free shipping</div>
+        <a class="cta" href="#" id="btn-3">Choose 3 Bottles</a>
+        <div class="badges">
+          <span class="badge">90-Day Supply</span>
+          <span class="badge">SSL Secured</span>
+        </div>
+      </article>
     </section>
 
-    <section aria-label="Lista de ofertas">
-      <div class="grid">
-        <!-- 1. Notebook Dell -->
-        <article class="card" id="notebook-dell">
-          <div class="thumb">
-            <img loading="lazy" src="https://m.media-amazon.com/images/I/71epkJC5SxL._AC_SX425_.jpg" width="425" height="425" alt="Notebook Dell Inspiron I15-I120K-A25P">
-          </div>
-          <div class="body">
-            <div class="title">Notebook Dell Inspiron I15‑I120K‑A25P • i5 12ª • 8GB • 512GB SSD • 15,6" FHD</div>
-            <div class="meta">Equilíbrio para trabalho e estudo com SSD rápido e tela Full HD.</div>
-            <div class="actions">
-              <a class="btn" data-product="Dell Inspiron" href="https://amzn.to/4oxuBEw" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 2. Smart TV Samsung -->
-        <article class="card" id="tv-samsung-55du8000">
-          <div class="thumb">
-            <img loading="lazy" src="https://m.media-amazon.com/images/I/51O+lnoMUUL._AC_UF1000,1000_QL80_FMwebp_.jpg" width="1000" height="1000" alt="Samsung Smart TV 55 Crystal UHD 4K 55DU8000">
-          </div>
-          <div class="body">
-            <div class="title">Samsung Smart TV 55" Crystal UHD 4K 55DU8000 • Dynamic Crystal Color</div>
-            <div class="meta">Cores vivas e sistema fluido. Ótima para filmes, séries e jogos.</div>
-            <div class="actions">
-              <a class="btn" data-product="Samsung 55DU8000" href="https://amzn.to/45T2JCz" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 3. iPhone 14 128GB -->
-        <article class="card" id="iphone-14">
-          <div class="thumb">
-            <img loading="lazy" src="https://m.media-amazon.com/images/I/61cwywLZR-L._AC_SX679_.jpg" width="679" height="679" alt="Apple iPhone 14 (128 GB) – Meia‑Noite">
-          </div>
-          <div class="body">
-            <div class="title">Apple iPhone 14 (128 GB) – Meia‑Noite</div>
-            <div class="meta">Chip A15 Bionic, câmeras excelentes e iOS com suporte longo.</div>
-            <div class="actions">
-              <a class="btn" data-product="iPhone 14" href="https://amzn.to/45w7TE4" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 4. Motorola Moto g35 5G -->
-        <article class="card" id="moto-g35-5g">
-          <div class="thumb">
-            <img loading="lazy" src="https://m.media-amazon.com/images/I/61pGaBV+-AL._AC_SX569_.jpg" width="569" height="569" alt="Motorola Moto g35 5G Verde 128GB 12GB RAM">
-          </div>
-          <div class="body">
-            <div class="title">Motorola Moto g35 5G • 128GB • 12GB (4GB+8GB Boost) • Câmera 50MP AI • NFC</div>
-            <div class="meta">Excelente custo‑benefício em 5G, tela 6.7" com super brilho.</div>
-            <div class="actions">
-              <a class="btn" data-product="Moto g35 5G" href="https://amzn.to/3JtbDyM" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- 5. iPhone 16 128GB -->
-        <article class="card" id="iphone-16">
-          <div class="thumb">
-            <img loading="lazy" src="https://m.media-amazon.com/images/I/41uUYcqfLxL._AC_SX466_.jpg" width="466" height="466" alt="Apple iPhone 16 (128 GB) – Preto">
-          </div>
-          <div class="body">
-            <div class="title">Apple iPhone 16 (128 GB) – Preto</div>
-            <div class="meta">Geração atual com eficiência e câmeras aprimoradas.</div>
-            <div class="actions">
-              <a class="btn" data-product="iPhone 16" href="https://amzn.to/4llResM" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="cta-wide">
-        <strong>Quer comparar rápido?</strong>
-        <a class="btn secondary" href="#iphone-14">Ir para iPhone 14</a>
-        <a class="btn secondary" href="#iphone-16">Ir para iPhone 16</a>
-        <a class="btn secondary" href="#tv-samsung-55du8000">Ir para TV 55"</a>
-        <a class="btn secondary" href="#notebook-dell">Ir para Notebook</a>
-      </div>
-
-      <p class="disclaimer">Aviso: Participamos do Programa de Associados da Amazon. Ao clicar e comprar, podemos receber comissão, sem custo extra. *Condições variam por região; verifique na Amazon.</p>
-    </section>
+    <div class="trust">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/Visa_2021.svg" alt="Visa">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Mastercard-logo.png" alt="Mastercard">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/PIX_Logo.svg" alt="Pix">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/SSL_logo.svg" alt="SSL">
+    </div>
   </main>
 
   <footer>
-    <p>© 2025 Ofertas Selecionadas • Página rápida e otimizada para Google Ads • Sem coleta de dados</p>
+    <p>© 2025 Sua Marca. Todos os direitos reservados. Termos • Privacidade • Política de Cookies.</p>
   </footer>
 
-  <script>
-    // Propaga UTMs da URL para os links da Amazon (amzn.to)
-    const params = new URLSearchParams(window.location.search);
-    const utm = params.toString();
-    if (utm) {
-      document.querySelectorAll('a[href^="https://amzn.to/"]').forEach(a=>{
-        try { const u=new URL(a.href); u.search = utm; a.href=u.toString(); } catch(e){}
-      });
-    }
+  <!-- Cookie Policy Modal -->
+  <div class="cookie" id="cookie">
+    <div class="cookie__box" role="dialog" aria-modal="true" aria-labelledby="cookie-title">
+      <h3 id="cookie-title">Cookie Policy</h3>
+      <p>Usamos cookies para personalizar conteúdo e anúncios, oferecer recursos de mídia social e analisar nosso tráfego. Ao clicar em <strong>Aceitar</strong>, você concorda com o uso de cookies conforme nossa <a href="#" target="_blank" rel="noopener">Política de Cookies</a>.</p>
+      <div class="cookie__actions">
+        <button class="btn" id="cookie-close">Fechar</button>
+        <button class="btn btn--primary" id="cookie-accept">Aceitar</button>
+      </div>
+    </div>
+  </div>
 
-    // Evento de clique externo (se GA4/Ads estiverem configurados no site)
-    // Dispara gtag e dataLayer quando o usuário clica em "Ver oferta"
-    document.querySelectorAll('a.btn[data-product]').forEach(a=>{
-      a.addEventListener('click',()=>{
-        const p=a.getAttribute('data-product')||'produto';
-        if(window.gtag){ gtag('event','outbound_click',{event_category:'amazon',event_label:p}); }
-        if(window.dataLayer){ window.dataLayer.push({event:'outbound_click',product:p}); }
-      });
+  <script>
+    // ====== COOKIE CONSENT ======
+    const modal = document.getElementById('cookie');
+    const ACCEPT_KEY = 'cookie_consent_v1';
+
+    function openCookie(){ modal.style.display = 'flex'; }
+    function closeCookie(){ modal.style.display = 'none'; }
+
+    document.getElementById('cookie-accept').addEventListener('click', () => {
+      localStorage.setItem(ACCEPT_KEY, '1');
+      closeCookie();
     });
+    document.getElementById('cookie-close').addEventListener('click', closeCookie);
+
+    // Abre após 1.2s se ainda não aceitou
+    window.addEventListener('load', () => {
+      if(!localStorage.getItem(ACCEPT_KEY)){
+        setTimeout(openCookie, 1200);
+      }
+    });
+
+    // ====== CTA PARAM (adapta links com ?src=) ======
+    function withParams(url){
+      const qp = location.search.replace(/^\?/, '');
+      return qp ? (url + (url.includes('?') ? '&' : '?') + qp) : url;
+    }
+    document.getElementById('btn-1').href = withParams('#checkout-1');
+    document.getElementById('btn-2').href = withParams('#checkout-6');
+    document.getElementById('btn-3').href = withParams('#checkout-3');
   </script>
 </body>
 </html>
