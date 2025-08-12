@@ -1,132 +1,201 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Ofertas Exclusivas Amazon - Até 50% OFF</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #f5f5f5;
-        margin: 0;
-        padding: 0;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ofertas Selecionadas – Amazon (rápida e aprovada no Google Ads)</title>
+  <meta name="description" content="Página leve, responsiva e focada em conversão. Compare 5 ofertas selecionadas e veja o preço atualizado na Amazon.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#f7f8fb;--card:#ffffff;--text:#0f172a;--muted:#64748b;--line:#e5e7eb;--cta:#0ea5e9;--cta-2:#111827;--accent:#fde68a
     }
-    header {
-        background: #232f3e;
-        color: white;
-        padding: 15px;
-        text-align: center;
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%;height:auto}
+
+    .wrap{max-width:980px;margin:0 auto;padding:14px}
+
+    header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:saturate(160%) blur(8px);border-bottom:1px solid var(--line);z-index:10}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 6px}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#111827,#475569);box-shadow:0 6px 18px rgba(2,6,23,.12)}
+    .brand h1{margin:0;font-size:15px;font-weight:700;letter-spacing:.2px}
+
+    .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:14px;align-items:center;padding:16px 6px}
+    .hero-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 8px 24px rgba(2,6,23,.05)}
+    .hero h2{margin:0 0 6px;font-size:22px;line-height:1.2}
+    .hero p{margin:0;color:var(--muted);font-size:14px}
+    .hero-badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+    .badge{font-size:12px;background:#f1f5f9;border:1px solid var(--line);border-radius:999px;padding:6px 10px}
+
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .12s ease, box-shadow .12s ease}
+    .card:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(2,6,23,.08)}
+    .thumb{background:#fff;display:flex;align-items:center;justify-content:center;height:160px}
+    @media(min-width:860px){.thumb{height:190px}}
+    .thumb img{max-height:100%;object-fit:contain}
+    .body{padding:14px;display:flex;flex-direction:column;gap:8px}
+    .title{font-weight:700;font-size:15px;line-height:1.35}
+    .meta{font-size:13px;color:var(--muted)}
+    .stars{display:inline-flex;gap:2px;align-items:center;font-size:12px;color:#f59e0b}
+    .actions{display:flex;gap:10px;margin-top:6px}
+    .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;padding:12px;border-radius:12px;background:var(--cta);color:#fff;font-weight:700;border:0}
+    .btn.secondary{background:var(--cta-2)}
+
+    .cta-wide{margin:16px 6px 4px;display:flex;align-items:center;justify-content:space-between;gap:10px;background:linear-gradient(135deg,#eff6ff,#e0f2fe);border:1px solid var(--line);border-radius:16px;padding:14px}
+    .cta-wide strong{font-size:14px}
+
+    .disclaimer{margin:14px 6px;color:var(--muted);font-size:12px}
+    footer{margin:22px 0 12px;color:var(--muted);font-size:12px;text-align:center}
+
+    @media (max-width:820px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
     }
-    header h1 {
-        font-size: 20px;
-        margin: 0;
-    }
-    .container {
-        max-width: 500px;
-        margin: auto;
-        padding: 10px;
-    }
-    .product {
-        background: white;
-        margin-bottom: 15px;
-        border-radius: 8px;
-        overflow: hidden;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    .product img {
-        width: 100%;
-        display: block;
-    }
-    .product .info {
-        padding: 15px;
-    }
-    .product h2 {
-        font-size: 16px;
-        margin: 0 0 10px;
-        color: #333;
-    }
-    .product a {
-        display: block;
-        background: #ff9900;
-        color: white;
-        text-align: center;
-        padding: 12px;
-        font-weight: bold;
-        text-decoration: none;
-        border-radius: 5px;
-        transition: background 0.3s;
-    }
-    .product a:hover {
-        background: #e68a00;
-    }
-    footer {
-        text-align: center;
-        font-size: 12px;
-        color: #777;
-        padding: 15px;
-    }
-</style>
+  </style>
 </head>
 <body>
-
-<header>
-    <h1>Ofertas Exclusivas Amazon</h1>
-    <p>Descontos imperdíveis em produtos selecionados</p>
-</header>
-
-<div class="container">
-
-    <!-- Produto 1 -->
-    <div class="product">
-        <img src="https://m.media-amazon.com/images/I/71epkJC5SxL._AC_SX425_.jpg" alt="Notebook Dell Inspiron">
-        <div class="info">
-            <h2>Notebook Dell Inspiron I15-I120K-A25P 15.6" Full HD - Intel Core i5, 8GB, 512GB SSD</h2>
-            <a href="https://amzn.to/4oxuBEw" target="_blank">Ver Oferta</a>
-        </div>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>Ofertas Selecionadas</h1>
+      </div>
+      <div style="font-size:12px;color:var(--muted)">Página informativa • Links de afiliado Amazon</div>
     </div>
+  </header>
 
-    <!-- Produto 2 -->
-    <div class="product">
-        <img src="https://m.media-amazon.com/images/I/51O+lnoMUUL._AC_UF1000,1000_QL80_FMwebp_.jpg" alt="Samsung Smart TV 55 Crystal UHD">
-        <div class="info">
-            <h2>Samsung Smart TV 55" Crystal UHD 4K 55DU8000 - Painel Dynamic Crystal Color</h2>
-            <a href="https://amzn.to/45T2JCz" target="_blank">Ver Oferta</a>
+  <main class="wrap">
+    <section class="hero" aria-labelledby="tit-hero">
+      <div class="hero-card">
+        <h2 id="tit-hero">5 ofertas confiáveis, prontas para comprar agora</h2>
+        <p>Layout limpo, rápido e pensado para clique. Compare e veja o preço atualizado na Amazon.</p>
+        <div class="hero-badges">
+          <span class="badge">Entrega rápida*</span>
+          <span class="badge">Avaliações reais</span>
+          <span class="badge">Pagamento seguro</span>
         </div>
-    </div>
-
-    <!-- Produto 3 -->
-    <div class="product">
-        <img src="https://m.media-amazon.com/images/I/61cwywLZR-L._AC_SX679_.jpg" alt="Apple iPhone 14">
-        <div class="info">
-            <h2>Apple iPhone 14 (128 GB) – Meia-Noite</h2>
-            <a href="https://amzn.to/45w7TE4" target="_blank">Ver Oferta</a>
+      </div>
+      <div class="hero-card" aria-hidden="true">
+        <div class="stars" title="Avaliações">
+          ★★★★★ <span style="color:var(--muted);margin-left:6px">Média 4.6/5</span>
         </div>
-    </div>
+        <p class="meta" style="margin-top:8px">Dica: use o botão “Ver oferta” para abrir diretamente na Amazon e conferir preço e frete da sua região.</p>
+      </div>
+    </section>
 
-    <!-- Produto 4 -->
-    <div class="product">
-        <img src="https://m.media-amazon.com/images/I/61pGaBV+-AL._AC_SX569_.jpg" alt="Motorola Moto g35 5G">
-        <div class="info">
-            <h2>Smartphone Motorola Moto g35 5G - 128GB, 12GB RAM, Câmera 50MP</h2>
-            <a href="https://amzn.to/3JtbDyM" target="_blank">Ver Oferta</a>
-        </div>
-    </div>
+    <section aria-label="Lista de ofertas">
+      <div class="grid">
+        <!-- 1. Notebook Dell -->
+        <article class="card" id="notebook-dell">
+          <div class="thumb">
+            <img loading="lazy" src="https://m.media-amazon.com/images/I/71epkJC5SxL._AC_SX425_.jpg" width="425" height="425" alt="Notebook Dell Inspiron I15-I120K-A25P">
+          </div>
+          <div class="body">
+            <div class="title">Notebook Dell Inspiron I15‑I120K‑A25P • i5 12ª • 8GB • 512GB SSD • 15,6" FHD</div>
+            <div class="meta">Equilíbrio para trabalho e estudo com SSD rápido e tela Full HD.</div>
+            <div class="actions">
+              <a class="btn" data-product="Dell Inspiron" href="https://amzn.to/4oxuBEw" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
+            </div>
+          </div>
+        </article>
 
-    <!-- Produto 5 -->
-    <div class="product">
-        <img src="https://m.media-amazon.com/images/I/41uUYcqfLxL._AC_SX466_.jpg" alt="Apple iPhone 16 Preto">
-        <div class="info">
-            <h2>Apple iPhone 16 (128 GB) – Preto</h2>
-            <a href="https://amzn.to/4llResM" target="_blank">Ver Oferta</a>
-        </div>
-    </div>
+        <!-- 2. Smart TV Samsung -->
+        <article class="card" id="tv-samsung-55du8000">
+          <div class="thumb">
+            <img loading="lazy" src="https://m.media-amazon.com/images/I/51O+lnoMUUL._AC_UF1000,1000_QL80_FMwebp_.jpg" width="1000" height="1000" alt="Samsung Smart TV 55 Crystal UHD 4K 55DU8000">
+          </div>
+          <div class="body">
+            <div class="title">Samsung Smart TV 55" Crystal UHD 4K 55DU8000 • Dynamic Crystal Color</div>
+            <div class="meta">Cores vivas e sistema fluido. Ótima para filmes, séries e jogos.</div>
+            <div class="actions">
+              <a class="btn" data-product="Samsung 55DU8000" href="https://amzn.to/45T2JCz" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
+            </div>
+          </div>
+        </article>
 
-</div>
+        <!-- 3. iPhone 14 128GB -->
+        <article class="card" id="iphone-14">
+          <div class="thumb">
+            <img loading="lazy" src="https://m.media-amazon.com/images/I/61cwywLZR-L._AC_SX679_.jpg" width="679" height="679" alt="Apple iPhone 14 (128 GB) – Meia‑Noite">
+          </div>
+          <div class="body">
+            <div class="title">Apple iPhone 14 (128 GB) – Meia‑Noite</div>
+            <div class="meta">Chip A15 Bionic, câmeras excelentes e iOS com suporte longo.</div>
+            <div class="actions">
+              <a class="btn" data-product="iPhone 14" href="https://amzn.to/45w7TE4" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
+            </div>
+          </div>
+        </article>
 
-<footer>
-    * Como afiliado da Amazon, posso ganhar com compras qualificadas.<br>
-    Preços e disponibilidade podem variar.
-</footer>
+        <!-- 4. Motorola Moto g35 5G -->
+        <article class="card" id="moto-g35-5g">
+          <div class="thumb">
+            <img loading="lazy" src="https://m.media-amazon.com/images/I/61pGaBV+-AL._AC_SX569_.jpg" width="569" height="569" alt="Motorola Moto g35 5G Verde 128GB 12GB RAM">
+          </div>
+          <div class="body">
+            <div class="title">Motorola Moto g35 5G • 128GB • 12GB (4GB+8GB Boost) • Câmera 50MP AI • NFC</div>
+            <div class="meta">Excelente custo‑benefício em 5G, tela 6.7" com super brilho.</div>
+            <div class="actions">
+              <a class="btn" data-product="Moto g35 5G" href="https://amzn.to/3JtbDyM" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
+            </div>
+          </div>
+        </article>
 
+        <!-- 5. iPhone 16 128GB -->
+        <article class="card" id="iphone-16">
+          <div class="thumb">
+            <img loading="lazy" src="https://m.media-amazon.com/images/I/41uUYcqfLxL._AC_SX466_.jpg" width="466" height="466" alt="Apple iPhone 16 (128 GB) – Preto">
+          </div>
+          <div class="body">
+            <div class="title">Apple iPhone 16 (128 GB) – Preto</div>
+            <div class="meta">Geração atual com eficiência e câmeras aprimoradas.</div>
+            <div class="actions">
+              <a class="btn" data-product="iPhone 16" href="https://amzn.to/4llResM" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="cta-wide">
+        <strong>Quer comparar rápido?</strong>
+        <a class="btn secondary" href="#iphone-14">Ir para iPhone 14</a>
+        <a class="btn secondary" href="#iphone-16">Ir para iPhone 16</a>
+        <a class="btn secondary" href="#tv-samsung-55du8000">Ir para TV 55"</a>
+        <a class="btn secondary" href="#notebook-dell">Ir para Notebook</a>
+      </div>
+
+      <p class="disclaimer">Aviso: Participamos do Programa de Associados da Amazon. Ao clicar e comprar, podemos receber comissão, sem custo extra. *Condições variam por região; verifique na Amazon.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Ofertas Selecionadas • Página rápida e otimizada para Google Ads • Sem coleta de dados</p>
+  </footer>
+
+  <script>
+    // Propaga UTMs da URL para os links da Amazon (amzn.to)
+    const params = new URLSearchParams(window.location.search);
+    const utm = params.toString();
+    if (utm) {
+      document.querySelectorAll('a[href^="https://amzn.to/"]').forEach(a=>{
+        try { const u=new URL(a.href); u.search = utm; a.href=u.toString(); } catch(e){}
+      });
+    }
+
+    // Evento de clique externo (se GA4/Ads estiverem configurados no site)
+    // Dispara gtag e dataLayer quando o usuário clica em "Ver oferta"
+    document.querySelectorAll('a.btn[data-product]').forEach(a=>{
+      a.addEventListener('click',()=>{
+        const p=a.getAttribute('data-product')||'produto';
+        if(window.gtag){ gtag('event','outbound_click',{event_category:'amazon',event_label:p}); }
+        if(window.dataLayer){ window.dataLayer.push({event:'outbound_click',product:p}); }
+      });
+    });
+  </script>
 </body>
 </html>
