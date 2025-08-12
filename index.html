@@ -30,8 +30,8 @@
 
     .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
     .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-    .thumb{height:180px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e0f2fe,#eef2ff)}
-    .thumb span{font-size:14px;color:#334155}
+    .thumb{height:180px;display:flex;align-items:center;justify-content:center;background:#fff}
+    .thumb img{max-width:100%;max-height:100%;object-fit:contain}
     .body{padding:14px;display:flex;flex-direction:column;gap:8px}
     .title{font-weight:700;font-size:16px}
     .meta{font-size:13px;color:var(--muted)}
@@ -73,7 +73,7 @@
       <div class="grid">
         <!-- 1. Notebook Dell -->
         <article class="card">
-          <div class="thumb"><span>Imagem do produto (opcional)</span></div>
+          <div class="thumb"><img src="https://m.media-amazon.com/images/I/71epkJC5SxL._AC_SX425_.jpg" alt="Notebook Dell Inspiron I15-I120K-A25P"></div>
           <div class="body">
             <div class="title">Notebook Dell Inspiron I15-I120K-A25P • i5 12ª • 8GB • 512GB SSD • 15,6" FHD • Win 11</div>
             <div class="meta">Ideal para trabalho e estudo: desempenho equilibrado, SSD rápido e tela Full HD.</div>
@@ -86,7 +86,7 @@
 
         <!-- 2. Smart TV Samsung -->
         <article class="card">
-          <div class="thumb"><span>Imagem do produto (opcional)</span></div>
+          <div class="thumb"><img src="https://m.media-amazon.com/images/I/51O+lnoMUUL._AC_UF1000,1000_QL80_FMwebp_.jpg" alt="Samsung Smart TV 55" Crystal UHD 4K 55DU8000"></div>
           <div class="body">
             <div class="title">Samsung Smart TV 55" Crystal UHD 4K 55DU8000 • Dynamic Crystal Color • Gaming Hub</div>
             <div class="meta">Cores vibrantes e sistema fluido. Perfeita para filmes, séries e jogos.</div>
@@ -125,7 +125,7 @@
 
         <!-- 5. iPhone 16 128GB -->
         <article class="card">
-          <div class="thumb"><span>Imagem do produto (opcional)</span></div>
+          <div class="thumb"><img src="https://m.media-amazon.com/images/I/41uUYcqfLxL._AC_SX466_.jpg" alt="Apple iPhone 16 (128 GB) – Preto"></div>
           <div class="body">
             <div class="title">Apple iPhone 16 (128 GB) – Preto</div>
             <div class="meta">Última geração, câmeras avançadas e melhor eficiência energética.</div>
@@ -157,7 +157,6 @@
   </footer>
 
   <script>
-    // Opcional: acrescente UTM automaticamente para rastrear campanhas do Google Ads
     const params = new URLSearchParams(window.location.search);
     const utm = params.toString();
     if (utm) {
