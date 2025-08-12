@@ -3,91 +3,172 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Avaliador Premiado – Pesquisas</title>
+  <title>Ofertas Selecionadas – Amazon (Página do Afiliado)</title>
+  <meta name="description" content="Página leve e otimizada para Google Ads. Compare rapidamente e clique para ver as ofertas na Amazon.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    body {font-family: 'Roboto', sans-serif;margin: 0;background: #f5f5f5;color: #333;}
-    .app {max-width: 480px;margin: auto;background: #fff;min-height: 100vh;display: flex;flex-direction: column;}
-    header {background: #1976d2;color: #fff;padding: 16px;font-size: 18px;font-weight: 500;}
-    .progress {height: 4px;background: #e0e0e0;}
-    .progress-bar {height: 4px;background: #1976d2;width: 0%;transition: width .3s ease;}
-    .content {flex: 1;padding: 20px;}
-    .question {font-size: 16px;margin-bottom: 20px;}
-    .option {background: #fff;border: 1px solid #ccc;padding: 12px;margin-bottom: 10px;border-radius: 8px;cursor: pointer;transition: background .2s;}
-    .option:hover {background: #f1f1f1;}
-    .balance {text-align: right;font-size: 14px;color: #555;margin-top: 10px;}
-    .final {text-align: center;padding: 30px 20px;}
-    .final h2 {margin-bottom: 10px;}
-    .btn {background: #1976d2;color: #fff;padding: 12px 20px;border: none;border-radius: 6px;cursor: pointer;font-size: 16px;}
-    .loading {text-align: center;padding: 40px;font-size: 16px;}
-    .error {text-align: center;padding: 20px;font-size: 16px;color: #d32f2f;}
+    :root{
+      --bg:#f6f7fb;--card:#ffffff;--text:#0f172a;--muted:#6b7280;--line:#e5e7eb;--brand:#111827;--cta:#0ea5e9;--ok:#16a34a
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:960px;margin:0 auto;padding:16px}
+    header{position:sticky;top:0;background:rgba(255,255,255,.9);backdrop-filter:saturate(160%) blur(6px);border-bottom:1px solid var(--line);z-index:10}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:10px 4px}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,#111827,#475569);box-shadow:0 6px 18px rgba(2,6,23,.15)}
+    .brand h1{font-size:16px;margin:0;font-weight:700}
+    .hero{display:grid;grid-template-columns:1.2fr 1fr;gap:16px;align-items:center;padding:18px 4px}
+    .hero-card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 8px 24px rgba(2,6,23,.06)}
+    .hero h2{margin:0 0 8px;font-size:26px;line-height:1.15}
+    .hero p{margin:0;color:var(--muted)}
+    .hero-badge{display:inline-block;margin-top:10px;font-size:12px;background:#ecfeff;border:1px solid #cffafe;color:#075985;padding:6px 10px;border-radius:999px}
+    .hero-visual{min-height:200px;border-radius:16px;border:1px solid var(--line);background:linear-gradient(135deg,#e2e8f0,#f8fafc)}
+
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+    .thumb{height:180px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#e0f2fe,#eef2ff)}
+    .thumb span{font-size:14px;color:#334155}
+    .body{padding:14px;display:flex;flex-direction:column;gap:8px}
+    .title{font-weight:700;font-size:16px}
+    .meta{font-size:13px;color:var(--muted)}
+    .actions{display:flex;gap:10px;margin-top:4px}
+    .btn{flex:1;display:inline-flex;align-items:center;justify-content:center;padding:12px;border-radius:12px;background:var(--cta);color:#fff;font-weight:700}
+    .btn.secondary{background:var(--brand)}
+
+    .disclaimer{margin:16px 0 6px;color:var(--muted);font-size:12px}
+    footer{margin:24px 0 12px;color:var(--muted);font-size:12px;text-align:center}
+
+    @media (max-width:820px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+    }
   </style>
 </head>
 <body>
-  <div class="app" id="app">
-    <header>Pesquisas Rápidas</header>
-    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
-    <div class="content" id="content"></div>
-  </div>
+  <header>
+    <div class="wrap nav">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <h1>Ofertas Selecionadas</h1>
+      </div>
+      <div style="font-size:12px;color:var(--muted)">Página informativa • Links de afiliado</div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" aria-labelledby="tit-hero">
+      <div class="hero-card">
+        <h2 id="tit-hero">Escolhidos a dedo: qualidade, preço e entrega rápida</h2>
+        <p>Compare os destaques abaixo e clique para ver o preço atualizado na Amazon. Página leve e otimizada para Google Ads.</p>
+        <span class="hero-badge">Atualizado automaticamente na Amazon após o clique</span>
+      </div>
+      <div class="hero-visual" aria-hidden="true"></div>
+    </section>
+
+    <section aria-label="Lista de ofertas">
+      <div class="grid">
+        <!-- 1. Notebook Dell -->
+        <article class="card">
+          <div class="thumb"><span>Imagem do produto (opcional)</span></div>
+          <div class="body">
+            <div class="title">Notebook Dell Inspiron I15-I120K-A25P • i5 12ª • 8GB • 512GB SSD • 15,6" FHD • Win 11</div>
+            <div class="meta">Ideal para trabalho e estudo: desempenho equilibrado, SSD rápido e tela Full HD.</div>
+            <div class="actions">
+              <a class="btn" href="https://amzn.to/4oxuBEw" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
+              <a class="btn secondary" href="#faq" rel="nofollow">Dúvidas</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 2. Smart TV Samsung -->
+        <article class="card">
+          <div class="thumb"><span>Imagem do produto (opcional)</span></div>
+          <div class="body">
+            <div class="title">Samsung Smart TV 55" Crystal UHD 4K 55DU8000 • Dynamic Crystal Color • Gaming Hub</div>
+            <div class="meta">Cores vibrantes e sistema fluido. Perfeita para filmes, séries e jogos.</div>
+            <div class="actions">
+              <a class="btn" href="https://amzn.to/45T2JCz" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
+              <a class="btn secondary" href="#faq" rel="nofollow">Dúvidas</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 3. iPhone 14 128GB -->
+        <article class="card">
+          <div class="thumb"><span>Imagem do produto (opcional)</span></div>
+          <div class="body">
+            <div class="title">Apple iPhone 14 (128 GB) – Meia‑Noite</div>
+            <div class="meta">Desempenho A15 Bionic, câmeras excelentes e iOS com atualizações longas.</div>
+            <div class="actions">
+              <a class="btn" href="https://amzn.to/45w7TE4" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
+              <a class="btn secondary" href="#faq" rel="nofollow">Dúvidas</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 4. Motorola Moto g35 5G -->
+        <article class="card">
+          <div class="thumb"><span>Imagem do produto (opcional)</span></div>
+          <div class="body">
+            <div class="title">Motorola Moto g35 5G • 128GB • 12GB (4GB RAM + 8GB RAM Boost) • Câmera 50MP AI • NFC</div>
+            <div class="meta">Excelente custo‑benefício em 5G, tela 6.7" com super brilho e boa autonomia.</div>
+            <div class="actions">
+              <a class="btn" href="https://amzn.to/3JtbDyM" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
+              <a class="btn secondary" href="#faq" rel="nofollow">Dúvidas</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- 5. iPhone 16 128GB -->
+        <article class="card">
+          <div class="thumb"><span>Imagem do produto (opcional)</span></div>
+          <div class="body">
+            <div class="title">Apple iPhone 16 (128 GB) – Preto</div>
+            <div class="meta">Última geração, câmeras avançadas e melhor eficiência energética.</div>
+            <div class="actions">
+              <a class="btn" href="https://amzn.to/4llResM" target="_blank" rel="nofollow sponsored noopener">Ver oferta na Amazon</a>
+              <a class="btn secondary" href="#faq" rel="nofollow">Dúvidas</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <p class="disclaimer">Aviso: Somos participantes do Programa de Associados da Amazon. Ao clicar e comprar, podemos receber comissão, sem custo extra para você.</p>
+    </section>
+
+    <section id="faq" style="margin-top:18px">
+      <details class="hero-card">
+        <summary><strong>Perguntas frequentes</strong></summary>
+        <ul style="margin:12px 0 0 18px;color:var(--muted);line-height:1.6">
+          <li><strong>Preço e frete:</strong> O preço é exibido diretamente na Amazon e pode mudar a qualquer momento. Frete e prazos variam conforme a sua região.</li>
+          <li><strong>Garantia:</strong> Todos os itens seguem a política de garantia do fabricante e da Amazon.</li>
+          <li><strong>Segurança:</strong> O pagamento é feito na Amazon, com total segurança.</li>
+        </ul>
+      </details>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Ofertas Selecionadas • Página otimizada para Google Ads • Links de afiliado Amazon</p>
+  </footer>
 
   <script>
-    const perguntas = [
-      'Com que frequência você faz compras online?',
-      'Você usa aplicativo de banco digital?',
-      'Qual formato de conteúdo você mais consome?',
-      'Ao escolher um produto, o que pesa mais?',
-      'Você costuma usar cupons de desconto?',
-      'Qual rede social você usa com mais frequência?',
-      'Você já pagou por um curso online?',
-      'Como você prefere pagar suas compras?',
-      'Qual seu principal objetivo financeiro hoje?',
-      'Com que frequência você avalia produtos que compra?'
-    ];
-    const opcoes = ['Opção 1', 'Opção 2', 'Opção 3', 'Opção 4'];
-    let passo = 0;
-    let saldo = 0;
-
-    function renderPergunta() {
-      if (passo < perguntas.length) {
-        document.getElementById('progressBar').style.width = ((passo / perguntas.length) * 100) + '%';
-        let html = `<div class="question">${perguntas[passo]}</div>`;
-        opcoes.forEach(op => {
-          html += `<div class="option" onclick="responder()">${op}</div>`;
-        });
-        html += `<div class="balance">Saldo: R$ ${saldo.toFixed(2)}</div>`;
-        document.getElementById('content').innerHTML = html;
-      } else {
-        document.getElementById('progressBar').style.width = '100%';
-        document.getElementById('content').innerHTML = `
-          <div class="final">
-            <h2>Parabéns! 🎉</h2>
-            <p>Você acumulou R$ ${saldo.toFixed(2)}</p>
-            <button class="btn" id="btnSaque">Realizar Saque</button>
-          </div>
-        `;
-        document.getElementById('btnSaque').addEventListener('click', realizarSaque);
-      }
+    // Opcional: acrescente UTM automaticamente para rastrear campanhas do Google Ads
+    const params = new URLSearchParams(window.location.search);
+    const utm = params.toString();
+    if (utm) {
+      document.querySelectorAll('a[href^="https://amzn.to/"]').forEach(a=>{
+        try {
+          const url = new URL(a.href);
+          url.search = utm;
+          a.href = url.toString();
+        } catch(e) {}
+      });
     }
-
-    function responder() {
-      saldo += Math.floor(Math.random() * 31) + 10;
-      passo++;
-      renderPergunta();
-    }
-
-    function realizarSaque() {
-      document.getElementById('content').innerHTML = `<div class="loading">Processando seu saque...<div class='spinner'></div></div>`;
-      setTimeout(() => {
-        document.getElementById('content').innerHTML = `
-          <div class="error">❌ Não foi possível concluir o saque.</div>
-          <p style="padding:0 20px;text-align:center;">Devido ao alto número de solicitações, o Google está aplicando uma taxa única de R$ 29,90 para liberar saques. Todo valor arrecadado será destinado para apoiar projetos sociais e melhorias na plataforma.</p>
-        `;
-      }, 3000);
-    }
-
-    renderPergunta();
   </script>
 </body>
 </html>
