@@ -2,136 +2,209 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Verificação | Não sou um robô</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verificação de Acesso • Não sou um robô</title>
+  <meta name="color-scheme" content="light" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --bg:#f6f7fb; --card:#ffffff; --text:#0f172a; --muted:#475569;
-      --primary:#0a3d62; --primary-600:#072c46; --radius:16px;
+      --bg:#0b1220;          /* cor base do overlay */
+      --card:#ffffff;        /* fundo do cartão */
+      --text:#0f172a;        /* texto */
+      --muted:#475569;       /* texto secundário */
+      --primary:#0a3d62;     /* botão */
+      --primary-600:#072c46; /* hover */
+      --ok:#16a34a;          /* status ok */
+      --danger:#ef4444;      /* status erro */
+      --radius:16px;         /* raio padrão */
+      --maxw:560px;          /* largura máxima do card */
     }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text); background:var(--bg);
-      min-height:100vh; display:flex; align-items:center; justify-content:center;
-      overflow:hidden;
+      background:#f5f7fb; color:var(--text);
+      min-height:100vh; overflow:hidden;
     }
 
-    /* Fundo desfocado ocupa toda a viewport; use sua imagem */
-    .backdrop{
+    /* ===== Fundo com imagem + desfoque profissional ===== */
+    .hero{
+      position:fixed; inset:0; z-index:0;
+      background: #0b1220 url('https://images.unsplash.com/photo-1529078155058-5d716f45d604?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+      filter: brightness(.85);
+    }
+    .veil{
       position:fixed; inset:0; z-index:1;
-      background:url('Design%20sem%20nome%20(4).png') center/cover no-repeat;
-      filter: blur(10px) brightness(0.85);
-      transform: scale(1.05);
-    }
-    .shade{
-      position:fixed; inset:0; z-index:2;
-      background:rgba(15,23,42,.35);
-      -webkit-backdrop-filter: blur(3px) saturate(120%);
-      backdrop-filter: blur(3px) saturate(120%);
+      background: rgba(11,18,32,.45);
+      -webkit-backdrop-filter: blur(10px) saturate(120%);
+      backdrop-filter: blur(10px) saturate(120%);
     }
 
-    /* Card central */
-    .wrap{ position:relative; z-index:3; width:min(560px,92vw); }
+    /* ===== Container central ===== */
+    .wrap{
+      position:relative; z-index:2; display:grid; place-items:center; min-height:100vh; padding:24px;
+    }
+
+    /* ===== Cartão ===== */
     .card{
-      background:var(--card); border:1px solid #e5e7eb; border-radius:var(--radius);
-      padding:22px; text-align:center; box-shadow:0 20px 50px rgba(2,8,23,.20);
+      width:min(var(--maxw), 92vw);
+      background:var(--card);
+      border:1px solid #e5e7eb; border-radius:var(--radius);
+      box-shadow:0 30px 80px rgba(2,8,23,.25);
+      padding:24px 22px;
       animation:pop .18s ease-out;
     }
-    @keyframes pop{from{transform:scale(.96);opacity:.6}to{transform:scale(1);opacity:1}}
-    h1{margin:0 0 6px; font-size:20px; font-weight:800}
-    p{margin:0 0 16px; color:var(--muted)}
+    @keyframes pop{from{transform:translateY(6px);opacity:.0}to{transform:translateY(0);opacity:1}}
 
-    /* Botão bloqueado até o captcha liberar */
+    .head{display:flex; align-items:center; gap:12px; margin-bottom:8px}
+    .shield{width:40px; height:40px; border-radius:12px; display:grid; place-items:center; background:#0a3d6220; color:#0a3d62}
+    h1{font-size:20px; font-weight:800; line-height:1.2; margin:0}
+    p.lead{margin:4px 0 16px; color:var(--muted)}
+
+    /* status inline */
+    .status{display:flex; align-items:center; gap:8px; font-size:13px; margin:10px 0 16px}
+    .dot{width:10px; height:10px; border-radius:999px; background:#aab3c0}
+    .status.ok .dot{background:var(--ok)}
+    .status.err .dot{background:var(--danger)}
+
+    /* área do captcha */
+    .captcha{display:flex; justify-content:center; margin:12px 0}
+
+    /* botão principal (só libera após validar no servidor) */
     .cta{
-      margin-top:14px; display:block; width:100%;
+      margin-top:12px; width:100%; display:inline-flex; justify-content:center; align-items:center; gap:8px;
       background:var(--primary); color:#fff; text-decoration:none; border:none;
       padding:12px 16px; border-radius:12px; font-weight:800; font-size:16px;
-      cursor:not-allowed; opacity:.5; transition:.2s;
+      transition: background .2s ease, transform .06s ease; cursor:not-allowed; opacity:.55;
     }
-    .cta.ready{cursor:pointer; opacity:1;}
-    .cta.ready:hover{background:var(--primary-600);} 
+    .cta.ready{cursor:pointer; opacity:1}
+    .cta:active{transform:translateY(1px)}
 
-    .trust{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:14px; font-size:12px; color:#334155; font-weight:700}
+    /* rodapé pequeno dentro do card */
+    .foot{
+      display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:14px;
+      font-size:12px; color:#334155; font-weight:700
+    }
     .chip{border:1px solid #e5e7eb; border-radius:10px; padding:8px 10px; background:#f8fafc}
 
-    .foot{position:fixed; bottom:10px; left:50%; transform:translateX(-50%); z-index:3; font-size:12px; color:#475569}
-    @media (max-width:520px){ .trust{grid-template-columns:1fr} }
+    /* snackbar */
+    .toast{position:fixed; left:50%; bottom:18px; transform:translateX(-50%) translateY(8px); z-index:3;
+      background:#0f172a; color:#fff; padding:10px 14px; border-radius:10px; font-size:14px; opacity:0; transition:.25s}
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+    @media (max-width:560px){ .foot{grid-template-columns:1fr} }
+    @media (prefers-reduced-motion: reduce){ .card{animation:none} }
   </style>
 </head>
 <body>
-  <!-- Fundo desfocado -->
-  <div class="backdrop" aria-hidden="true"></div>
-  <div class="shade" aria-hidden="true"></div>
+  <!-- Fundo desfocado profissional -->
+  <div class="hero" aria-hidden="true"></div>
+  <div class="veil" aria-hidden="true"></div>
 
-  <!-- Card de verificação -->
+  <!-- Conteúdo central -->
   <div class="wrap">
     <div class="card" role="dialog" aria-modal="true" aria-label="Verificação humana">
-      <h1>Verifique se você não é um robô</h1>
-      <p>Marque a caixa abaixo para continuar para a página de solicitação.</p>
+      <div class="head">
+        <div class="shield" aria-hidden="true">🔒</div>
+        <div>
+          <h1>Verificação de acesso</h1>
+          <p class="lead">Marque a caixa abaixo para confirmar que você é humano e continuar.</p>
+        </div>
+      </div>
 
-      <!-- reCAPTCHA v2 (Checkbox) -->
-      <div id="captcha" style="display:flex; justify-content:center; margin:12px 0;">
+      <div class="status" id="status"><span class="dot" aria-hidden="true"></span><span id="statusText">Aguardando verificação…</span></div>
+
+      <!-- reCAPTCHA v2 Checkbox -->
+      <div class="captcha">
         <div class="g-recaptcha"
              data-sitekey="YOUR_SITE_KEY_HERE"
-             data-callback="onCaptchaSuccess"
+             data-callback="onCaptchaClientSuccess"
              data-expired-callback="onCaptchaExpired"></div>
       </div>
 
-      <!-- Botão que libera após sucesso -->
-      <a id="go" class="cta" href="https://sua-oferta.com" aria-disabled="true">Continuar</a>
+      <!-- Botão liberado somente após validação no servidor -->
+      <a id="go" class="cta" href="#" aria-disabled="true">Continuar</a>
 
-      <div class="trust">
-        <div class="chip">🔒 Conexão Segura (SSL)</div>
+      <div class="foot">
         <div class="chip">✅ Dados protegidos (LGPD)</div>
+        <div class="chip">🔐 Conexão Segura (SSL)</div>
         <div class="chip">🕒 Atendimento 24h</div>
       </div>
     </div>
   </div>
 
-  <div class="foot">Cartório Central de Registro Civil – SP • Todos os direitos reservados</div>
+  <!-- Toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite">Pronto!</div>
 
-  <!-- Script reCAPTCHA -->
+  <!-- Scripts do reCAPTCHA -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script>
-    function onCaptchaSuccess(token){
-      const btn = document.getElementById('go');
-      btn.classList.add('ready');
-      btn.setAttribute('aria-disabled','false');
-      btn.style.cursor = 'pointer';
-      // Se quiser redirecionar automaticamente ao validar no cliente, descomente:
-      // window.location.href = btn.href;
+    // ===== CONFIGURE AQUI =====
+    const OFFER_URL = 'https://sua-oferta.com'; // URL de destino após validação
+    const VERIFY_ENDPOINT = '/api/recaptcha-verify'; // Seu endpoint backend que valida o token no Google
 
-      // Recomendado: validar o token no seu backend e só então redirecionar.
-      // fetch('/api/recaptcha-verify', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ token })})
-      //   .then(r => r.ok ? window.location.href = btn.href : onCaptchaExpired())
+    const $ = (q)=>document.querySelector(q);
+    const toast = (m)=>{ const t=$('#toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 1600); };
+
+    // Atualiza UI de status
+    function setStatus(type, msg){
+      const box = $('#status'); const dot = box.querySelector('.dot'); const txt = $('#statusText');
+      box.classList.remove('ok','err');
+      if(type==='ok') box.classList.add('ok');
+      if(type==='err') box.classList.add('err');
+      txt.textContent = msg || '';
     }
+
+    // Callback do reCAPTCHA no CLIENTE: recebe token e envia ao servidor para validação
+    async function onCaptchaClientSuccess(token){
+      try{
+        setStatus('ok','Verificando no servidor…');
+        // Validação real (servidor deve usar secret key em https://www.google.com/recaptcha/api/siteverify)
+        const r = await fetch(VERIFY_ENDPOINT, {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ token })
+        });
+        if(!r.ok){ throw new Error('Falha na verificação'); }
+        const data = await r.json();
+        if(data && data.success){
+          // Libera botão e aplica redirect imediato (opcional)
+          const go = $('#go');
+          go.href = OFFER_URL;
+          go.classList.add('ready');
+          go.setAttribute('aria-disabled','false');
+          go.style.cursor='pointer';
+          setStatus('ok','Verificado com sucesso. Você pode continuar.');
+
+          // Redirecionamento automático (se preferir, comente esta linha para exigir clique):
+          window.location.href = OFFER_URL;
+        }else{
+          onCaptchaExpired();
+          toast('Não foi possível verificar. Tente novamente.');
+        }
+      }catch(e){
+        onCaptchaExpired();
+        toast('Erro ao validar. Tente novamente.');
+      }
+    }
+
     function onCaptchaExpired(){
-      const btn = document.getElementById('go');
-      btn.classList.remove('ready');
-      btn.setAttribute('aria-disabled','true');
-      btn.style.cursor = 'not-allowed';
+      setStatus('err','Validação expirada ou inválida. Marque novamente.');
+      const go = $('#go');
+      go.classList.remove('ready');
+      go.setAttribute('aria-disabled','true');
+      go.style.cursor='not-allowed';
     }
-  </script>
-  <script>
-    // Permite configurar rapidamente via querystring:
-    // ?offer=https://suaoferta.com&bg=https://imagem.com/fundo.jpg
+
+    // Permite parametrizar via querystring sem editar o arquivo:
+    // ?offer=https://destino.com&bg=https://imagem.jpg
     (function(){
       const qs = new URLSearchParams(location.search);
       const offer = qs.get('offer');
       const bg = qs.get('bg');
-      if (offer) {
-        const a = document.getElementById('go');
-        if (a) a.href = offer;
-      }
-      if (bg) {
-        const b = document.querySelector('.backdrop');
-        if (b) b.style.background = `url('${bg}') center/cover no-repeat`;
-      }
+      if(offer){ window.OFFER_URL = offer; }
+      if(bg){ document.querySelector('.hero').style.background = `#0b1220 url('${bg}') center/cover no-repeat`; }
     })();
   </script>
 </body>
