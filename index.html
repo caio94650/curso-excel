@@ -1,210 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Verificação de Acesso • Não sou um robô</title>
-  <meta name="color-scheme" content="light" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
-  <style>
-    :root{
-      --bg:#0b1220;          /* cor base do overlay */
-      --card:#ffffff;        /* fundo do cartão */
-      --text:#0f172a;        /* texto */
-      --muted:#475569;       /* texto secundário */
-      --primary:#0a3d62;     /* botão */
-      --primary-600:#072c46; /* hover */
-      --ok:#16a34a;          /* status ok */
-      --danger:#ef4444;      /* status erro */
-      --radius:16px;         /* raio padrão */
-      --maxw:560px;          /* largura máxima do card */
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verificação de Segurança</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #005bea, #00c6fb);
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:#f5f7fb; color:var(--text);
-      min-height:100vh; overflow:hidden;
+    .container {
+        background: rgba(255,255,255,0.15);
+        padding: 40px;
+        border-radius: 15px;
+        text-align: center;
+        backdrop-filter: blur(8px);
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        max-width: 400px;
+        width: 90%;
     }
-
-    /* ===== Fundo com imagem + desfoque profissional ===== */
-    .hero{
-      position:fixed; inset:0; z-index:0;
-      background: radial-gradient(1200px 600px at 50% 0%, #0f1a32 0%, #0b1220 42%, #091024 100%);
-      filter: none;
+    h1 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
     }
-    .veil{
-      position:fixed; inset:0; z-index:1;
-      background: rgba(11,18,32,.45);
-      -webkit-backdrop-filter: blur(10px) saturate(120%);
-      backdrop-filter: blur(10px) saturate(120%);
+    p {
+        font-size: 1rem;
+        margin-bottom: 30px;
     }
-
-    /* ===== Container central ===== */
-    .wrap{
-      position:relative; z-index:2; display:grid; place-items:center; min-height:100vh; padding:24px;
+    button {
+        background-color: #ffcc00;
+        color: #000;
+        border: none;
+        padding: 15px 30px;
+        font-size: 1.1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: all 0.3s ease;
     }
-
-    /* ===== Cartão ===== */
-    .card{
-      width:min(var(--maxw), 92vw);
-      background:var(--card);
-      border:1px solid #e5e7eb; border-radius:var(--radius);
-      box-shadow:0 30px 80px rgba(2,8,23,.25);
-      padding:24px 22px;
-      animation:pop .18s ease-out;
+    button:hover {
+        background-color: #ffdb4d;
     }
-    @keyframes pop{from{transform:translateY(6px);opacity:.0}to{transform:translateY(0);opacity:1}}
-
-    .head{display:flex; align-items:center; gap:12px; margin-bottom:8px}
-    .shield{width:40px; height:40px; border-radius:12px; display:grid; place-items:center; background:#0a3d6220; color:#0a3d62}
-    h1{font-size:20px; font-weight:800; line-height:1.2; margin:0}
-    p.lead{margin:4px 0 16px; color:var(--muted)}
-
-    /* status inline */
-    .status{display:flex; align-items:center; gap:8px; font-size:13px; margin:10px 0 16px}
-    .dot{width:10px; height:10px; border-radius:999px; background:#aab3c0}
-    .status.ok .dot{background:var(--ok)}
-    .status.err .dot{background:var(--danger)}
-
-    /* área do captcha */
-    .captcha{display:flex; justify-content:center; margin:12px 0}
-
-    /* botão principal (só libera após validar no servidor) */
-    .cta{
-      margin-top:12px; width:100%; display:inline-flex; justify-content:center; align-items:center; gap:8px;
-      background:var(--primary); color:#fff; text-decoration:none; border:none;
-      padding:12px 16px; border-radius:12px; font-weight:800; font-size:16px;
-      transition: background .2s ease, transform .06s ease; cursor:not-allowed; opacity:.55;
+    .loading {
+        display: none;
+        margin-top: 15px;
+        font-size: 0.9rem;
+        color: #fff;
     }
-    .cta.ready{cursor:pointer; opacity:1}
-    .cta:active{transform:translateY(1px)}
-
-    /* rodapé pequeno dentro do card */
-    .foot{
-      display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:14px;
-      font-size:12px; color:#334155; font-weight:700
-    }
-    .chip{border:1px solid #e5e7eb; border-radius:10px; padding:8px 10px; background:#f8fafc}
-
-    /* snackbar */
-    .toast{position:fixed; left:50%; bottom:18px; transform:translateX(-50%) translateY(8px); z-index:3;
-      background:#0f172a; color:#fff; padding:10px 14px; border-radius:10px; font-size:14px; opacity:0; transition:.25s}
-    .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
-
-    @media (max-width:560px){ .foot{grid-template-columns:1fr} }
-    @media (prefers-reduced-motion: reduce){ .card{animation:none} }
-  </style>
+</style>
 </head>
 <body>
-  <!-- Fundo desfocado profissional -->
-  <div class="hero" aria-hidden="true"></div>
-  <div class="veil" aria-hidden="true"></div>
 
-  <!-- Conteúdo central -->
-  <div class="wrap">
-    <div class="card" role="dialog" aria-modal="true" aria-label="Verificação humana">
-      <div class="head">
-        <div class="shield" aria-hidden="true">🔒</div>
-        <div>
-          <h1>Verificação de acesso</h1>
-          <p class="lead">Marque a caixa abaixo para confirmar que você é humano e continuar.</p>
-        </div>
-      </div>
+<div class="container">
+    <h1>Verificação de Segurança</h1>
+    <p>Antes de continuar, confirme que você não é um robô.</p>
+    <button id="continueBtn">✔ Continuar</button>
+    <div class="loading" id="loadingMsg">Verificando...</div>
+</div>
 
-      <div class="status" id="status"><span class="dot" aria-hidden="true"></span><span id="statusText">Aguardando verificação…</span></div>
+<script>
+    document.getElementById('continueBtn').addEventListener('click', function() {
+        document.getElementById('loadingMsg').style.display = 'block';
+        setTimeout(function(){
+            window.location.href = "https://sua-oferta.com";
+        }, 2000); // Espera 2 segundos antes de redirecionar
+    });
+</script>
 
-      <!-- reCAPTCHA v2 Checkbox -->
-      <div class="captcha">
-        <div class="g-recaptcha"
-             data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-             data-callback="onCaptchaClientSuccess"
-             data-expired-callback="onCaptchaExpired"></div>
-      </div>
-
-      <!-- Botão liberado somente após validação no servidor -->
-      <a id="go" class="cta" href="#" aria-disabled="true">Continuar</a>
-
-      <div class="foot">
-        <div class="chip">✅ Dados protegidos (LGPD)</div>
-        <div class="chip">🔐 Conexão Segura (SSL)</div>
-        <div class="chip">🕒 Atendimento 24h</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Toast -->
-  <div class="toast" id="toast" role="status" aria-live="polite">Pronto!</div>
-
-  <!-- Scripts do reCAPTCHA -->
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-  <script>
-    // ===== CONFIGURE AQUI =====
-    const OFFER_URL = 'https://sua-oferta.com'; // URL de destino após validação
-    const VERIFY_ENDPOINT = ''; // vazio = fallback cliente // Seu endpoint backend que valida o token no Google
-
-    const $ = (q)=>document.querySelector(q);
-    const toast = (m)=>{ const t=$('#toast'); t.textContent=m; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'), 1600); };
-
-    // Atualiza UI de status
-    function setStatus(type, msg){
-      const box = $('#status'); const dot = box.querySelector('.dot'); const txt = $('#statusText');
-      box.classList.remove('ok','err');
-      if(type==='ok') box.classList.add('ok');
-      if(type==='err') box.classList.add('err');
-      txt.textContent = msg || '';
-    }
-
-    // Callback do reCAPTCHA no CLIENTE: recebe token e envia ao servidor para validação
-    async function onCaptchaClientSuccess(token){
-      try{
-        // Se houver endpoint de verificação, valida no servidor; senão faz fallback no cliente
-        if(VERIFY_ENDPOINT){
-          setStatus('ok','Verificando no servidor…');
-          const r = await fetch(VERIFY_ENDPOINT, { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ token }) });
-          if(!r.ok) throw new Error('Falha na verificação');
-          const data = await r.json();
-          if(!(data && data.success)) throw new Error('Token inválido');
-        }
-        // Libera e redireciona
-        const go = document.getElementById('go');
-        go.href = OFFER_URL;
-        go.classList.add('ready');
-        go.setAttribute('aria-disabled','false');
-        go.style.cursor='pointer';
-        setStatus('ok','Verificado com sucesso. Redirecionando…');
-        window.location.href = OFFER_URL;
-      }catch(e){
-        onCaptchaExpired();
-        toast('Erro ao validar. Tente novamente.');
-      }
-    }
-
-    function onCaptchaExpired(){
-      setStatus('err','Validação expirada ou inválida. Marque novamente.');
-      const go = document.getElementById('go');
-      go.classList.remove('ready');
-      go.setAttribute('aria-disabled','true');
-      go.style.cursor='not-allowed';
-    }(){
-      setStatus('err','Validação expirada ou inválida. Marque novamente.');
-      const go = $('#go');
-      go.classList.remove('ready');
-      go.setAttribute('aria-disabled','true');
-      go.style.cursor='not-allowed';
-    }
-
-    // Permite parametrizar via querystring sem editar o arquivo:
-    // ?offer=https://destino.com&bg=https://imagem.jpg
-    (function(){
-      const qs = new URLSearchParams(location.search);
-      const offer = qs.get('offer');
-      const bg = qs.get('bg');
-      if(offer){ window.OFFER_URL = offer; }
-      if(bg){ document.querySelector('.hero').style.background = `#0b1220 url('${bg}') center/cover no-repeat`; }
-    })();
-  </script>
 </body>
 </html>
