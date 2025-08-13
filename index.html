@@ -1,77 +1,176 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verificação de Segurança</title>
-<style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background: linear-gradient(135deg, #005bea, #00c6fb);
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Verificação de Segurança</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg1:#6a00f4;      /* gradiente vivo */
+      --bg2:#00d4ff;
+      --bg3:#00b894;
+      --card:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --primary:#0a3d62;  /* CTA */
+      --primary-600:#072c46;
+      --radius:16px;
+      --shadow:0 30px 80px rgba(2,8,23,.25);
     }
-    .container {
-        background: rgba(255,255,255,0.15);
-        padding: 40px;
-        border-radius: 15px;
-        text-align: center;
-        backdrop-filter: blur(8px);
-        box-shadow: 0 0 20px rgba(0,0,0,0.3);
-        max-width: 400px;
-        width: 90%;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text); min-height:100vh; overflow-x:hidden;
+      background: radial-gradient(1200px 600px at 80% -10%, #ffffff10 0%, #00000000 40%),
+                  linear-gradient(135deg, var(--bg1), var(--bg2) 50%, var(--bg3));
     }
-    h1 {
-        font-size: 1.5rem;
-        margin-bottom: 20px;
+
+    /* Header simples opcional */
+    .header{display:flex; justify-content:center; padding:22px 16px; color:#fff; text-align:center}
+    .header h1{margin:0; font-size:22px; font-weight:800; text-shadow:0 2px 18px rgba(0,0,0,.25)}
+
+    /* Card central translúcido */
+    .container{display:grid; place-items:center; padding:28px}
+    .card{
+      width:min(520px,92vw);
+      background:rgba(255,255,255,.14);
+      border:1px solid rgba(255,255,255,.35);
+      border-radius:var(--radius);
+      backdrop-filter: blur(10px) saturate(140%);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
+      box-shadow:var(--shadow);
+      color:#fff; text-align:center; padding:24px 22px; animation:pop .18s ease-out;
     }
-    p {
-        font-size: 1rem;
-        margin-bottom: 30px;
+    @keyframes pop{from{transform:translateY(6px);opacity:.0}to{transform:translateY(0);opacity:1}}
+    .card h2{margin:0 0 8px; font-size:22px; font-weight:800}
+    .card p{margin:0 0 18px; color:#f1f5f9}
+
+    .cta{
+      display:inline-flex; align-items:center; justify-content:center; gap:10px;
+      background:#fff; color:var(--primary); font-weight:800; border:0; border-radius:12px;
+      padding:12px 18px; cursor:pointer; transition:transform .05s ease, box-shadow .2s ease;
+      box-shadow:0 8px 24px rgba(2,8,23,.18);
     }
-    button {
-        background-color: #ffcc00;
-        color: #000;
-        border: none;
-        padding: 15px 30px;
-        font-size: 1.1rem;
-        border-radius: 8px;
-        cursor: pointer;
-        font-weight: bold;
-        transition: all 0.3s ease;
+    .cta:hover{box-shadow:0 10px 30px rgba(2,8,23,.24)}
+    .cta:active{transform:translateY(1px)}
+
+    /* ===== Modal ===== */
+    .modal-backdrop{position:fixed; inset:0; display:none; align-items:center; justify-content:center; padding:20px; z-index:40}
+    .modal-backdrop.show{display:flex}
+    .modal-dim{position:absolute; inset:0; background:rgba(3,6,23,.45); backdrop-filter: blur(6px) saturate(120%)}
+    .modal{
+      position:relative; z-index:1; width:min(520px,92vw); background:var(--card); border:1px solid #e5e7eb; border-radius:var(--radius);
+      box-shadow:var(--shadow); padding:20px 18px; text-align:left; animation:zoom .14s ease-out;
     }
-    button:hover {
-        background-color: #ffdb4d;
-    }
-    .loading {
-        display: none;
-        margin-top: 15px;
-        font-size: 0.9rem;
-        color: #fff;
-    }
-</style>
+    @keyframes zoom{from{transform:scale(.96); opacity:.4} to{transform:scale(1); opacity:1}}
+
+    .modal header{display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:6px}
+    .modal h3{margin:0; font-size:18px; font-weight:800; color:var(--text)}
+    .modal .close{appearance:none; border:0; background:#f1f5f9; color:#0f172a; border-radius:10px; padding:8px 10px; cursor:pointer}
+
+    .modal p{color:var(--muted); margin:0 0 10px}
+
+    /* Área que imita um desafio simples (sem depender de serviço externo) */
+    .check-row{display:flex; align-items:center; gap:10px; background:#f8fafc; border:1px solid #e5e7eb; border-radius:12px; padding:12px}
+    .check-row input{width:20px; height:20px}
+    .check-row label{font-weight:600; color:#334155}
+
+    .progress{height:8px; background:#eaf0ff; border-radius:999px; overflow:hidden; margin:12px 0}
+    .bar{height:100%; width:0; background:linear-gradient(90deg, var(--primary), #1e6bb8); transition:width .35s ease}
+
+    .modal .actions{display:flex; justify-content:flex-end; gap:10px; margin-top:8px}
+    .btn{appearance:none; border:0; border-radius:12px; padding:10px 14px; font-weight:800; cursor:pointer}
+    .btn.ghost{background:#f1f5f9; color:#0f172a}
+    .btn.primary{background:var(--primary); color:#fff}
+    .btn.primary[disabled]{opacity:.6; cursor:not-allowed}
+
+    .note{font-size:12px; color:#64748b; margin-top:6px}
+
+    .toast{position:fixed; left:50%; bottom:18px; transform:translateX(-50%) translateY(6px); background:#0f172a; color:#fff; padding:10px 14px; border-radius:10px; opacity:0; transition:.22s; z-index:60}
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+    @media (max-width:520px){ .card{padding:18px 16px} .modal{padding:18px 16px} }
+  </style>
 </head>
 <body>
-
-<div class="container">
+  <div class="header">
     <h1>Verificação de Segurança</h1>
-    <p>Antes de continuar, confirme que você não é um robô.</p>
-    <button id="continueBtn">✔ Continuar</button>
-    <div class="loading" id="loadingMsg">Verificando...</div>
-</div>
+  </div>
 
-<script>
-    document.getElementById('continueBtn').addEventListener('click', function() {
-        document.getElementById('loadingMsg').style.display = 'block';
-        setTimeout(function(){
-            window.location.href = "https://sua-oferta.com";
-        }, 2000); // Espera 2 segundos antes de redirecionar
+  <main class="container">
+    <section class="card" aria-label="Cartão de verificação">
+      <h2>Confirme que você é humano</h2>
+      <p>Para continuar, clique no botão abaixo e conclua a verificação rápida.</p>
+      <button id="openModal" class="cta">✔ Continuar</button>
+    </section>
+  </main>
+
+  <!-- Modal acessível -->
+  <div id="modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="m-title" aria-describedby="m-desc">
+    <div class="modal-dim" data-close></div>
+    <div class="modal">
+      <header>
+        <h3 id="m-title">Verificação rápida</h3>
+        <button class="close" type="button" title="Fechar" aria-label="Fechar" data-close>✕</button>
+      </header>
+      <p id="m-desc">Marque a caixa abaixo e clique em <strong>Prosseguir</strong>. Levamos só alguns segundos.</p>
+
+      <div class="check-row" style="margin-top:10px">
+        <input id="humano" type="checkbox" />
+        <label for="humano">Não sou um robô</label>
+      </div>
+
+      <div class="progress" aria-hidden="true"><div id="bar" class="bar"></div></div>
+      <div class="note">Utilizamos checagens de segurança para manter seu acesso protegido.</div>
+
+      <div class="actions">
+        <button class="btn ghost" type="button" data-close>Cancelar</button>
+        <button id="prosseguir" class="btn primary" type="button" disabled>Prosseguir</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite">Verificando…</div>
+
+  <script>
+    // ===== CONFIG =====
+    let OFFER_URL = 'https://sua-oferta.com';  // troque aqui pela URL final
+    const DELAY_MS = 1400;                     // pequeno atraso após clicar Prosseguir
+
+    // Permite trocar oferta por querystring: ?offer=https://...
+    (function(){ const q=new URLSearchParams(location.search); const o=q.get('offer'); if(o) OFFER_URL=o; })();
+
+    const $ = (q)=>document.querySelector(q);
+    const modal = $('#modal');
+    const openBtn = $('#openModal');
+    const goBtn = $('#prosseguir');
+    const check = $('#humano');
+    const bar = $('#bar');
+    const toast = $('#toast');
+
+    function openModal(){ modal.classList.add('show'); check.focus(); bar.style.width='0%'; goBtn.disabled=true; }
+    function closeModal(){ modal.classList.remove('show'); openBtn.focus(); }
+
+    function showToast(msg){ toast.textContent=msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 1600); }
+
+    openBtn.addEventListener('click', openModal);
+    modal.addEventListener('click', (e)=>{ if(e.target.hasAttribute('data-close')) closeModal(); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.classList.contains('show')) closeModal(); });
+
+    // Habilita botão quando marcar "não sou robô"
+    check.addEventListener('change', ()=>{ goBtn.disabled = !check.checked; });
+
+    // Ao prosseguir, anima barra e redireciona
+    goBtn.addEventListener('click', ()=>{
+      if(goBtn.disabled) return;
+      showToast('Verificando…');
+      // anima progressivo
+      let p=0; const t=setInterval(()=>{ p=Math.min(100, p+8+Math.random()*10); bar.style.width=p+'%'; if(p>=100){ clearInterval(t); setTimeout(()=>{ window.location.href = OFFER_URL; }, 120); } }, 100);
     });
-</script>
-
+  </script>
 </body>
 </html>
