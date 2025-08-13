@@ -117,5 +117,22 @@
       btn.style.cursor = 'not-allowed';
     }
   </script>
+  <script>
+    // Permite configurar rapidamente via querystring:
+    // ?offer=https://suaoferta.com&bg=https://imagem.com/fundo.jpg
+    (function(){
+      const qs = new URLSearchParams(location.search);
+      const offer = qs.get('offer');
+      const bg = qs.get('bg');
+      if (offer) {
+        const a = document.getElementById('go');
+        if (a) a.href = offer;
+      }
+      if (bg) {
+        const b = document.querySelector('.backdrop');
+        if (b) b.style.background = `url('${bg}') center/cover no-repeat`;
+      }
+    })();
+  </script>
 </body>
 </html>
