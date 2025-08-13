@@ -3,199 +3,113 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Sua Oferta Oficial</title>
+  <title>Verificação rápida | Solicitação de 2ª via</title>
+  <meta name="description" content="Página segura com verificação reCAPTCHA para continuar sua solicitação de 2ª via da certidão de nascimento." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     :root{
       --primary:#0a3d62;
+      --text:#0f172a;
+      --muted:#475569;
+      --card:#ffffff;
+      --bg:#f7fafc;
       --radius:14px;
-      --shadow:0 8px 24px rgba(0,0,0,.12);
+      --shadow:0 10px 28px rgba(2,8,23,.08);
     }
-    *{box-sizing:border-box;margin:0;padding:0}
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:#f8fafc;
-      color:#0f172a;
-      line-height:1.5;
+      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      color:var(--text); background:var(--bg); line-height:1.6;
     }
     header{
-      background:var(--primary);
-      color:#fff;
-      padding:18px;
-      text-align:center;
+      background:var(--primary); color:#fff; padding:18px 16px; text-align:center;
     }
-    header h1{font-size:22px;font-weight:800;margin-bottom:4px;}
-    header p{font-size:14px;opacity:0.9;}
-    .container{max-width:900px;margin:0 auto;padding:24px;}
-    .hero{
-      background:#fff;
-      padding:24px;
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      text-align:center;
+    header h1{margin:0; font-size:20px; font-weight:800}
+    .wrap{max-width:720px; margin:0 auto; padding:22px}
+    .card{
+      background:var(--card); border:1px solid #e5e7eb; border-radius:var(--radius);
+      box-shadow:var(--shadow); padding:22px; text-align:center;
     }
-    .hero h2{font-size:26px;margin-bottom:10px;}
-    .hero p{margin-bottom:18px;color:#475569;}
-    .cta-btn{
-      background:#fff;
-      color:var(--primary);
-      font-weight:800;
-      padding:12px 20px;
-      border-radius:var(--radius);
-      border:2px solid var(--primary);
-      cursor:pointer;
-      transition:0.2s;
+    p{color:var(--muted); margin:0 0 16px}
+    .g-recaptcha{display:inline-block; margin:10px 0 14px}
+    .cta{
+      width:100%; max-width:320px;
+      background:var(--primary); color:#fff; font-weight:800; border:0; border-radius:12px;
+      padding:12px 18px; cursor:pointer; transition:.15s; display:inline-block;
     }
-    .cta-btn:hover{
-      background:var(--primary);
-      color:#fff;
-    }
-    section{
-      margin-top:36px;
-    }
-    h3{
-      font-size:20px;
-      margin-bottom:12px;
-    }
-    .benefits,.faq{
-      display:grid;
-      gap:18px;
-    }
-    .benefit-card{
-      background:#fff;
-      padding:16px;
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-    footer{
-      background:#e2e8f0;
-      padding:14px;
-      font-size:13px;
-      text-align:center;
-    }
-    footer a{
-      color:var(--primary);
-      text-decoration:none;
-      margin:0 6px;
-    }
-    /* Modal */
-    .modal-backdrop{
-      position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.5);z-index:99;
-    }
-    .modal-backdrop.show{display:flex;}
-    .modal{
-      background:#fff;
-      padding:20px;
-      border-radius:var(--radius);
-      max-width:420px;
-      width:90%;
-      text-align:center;
-      box-shadow:var(--shadow);
-    }
-    .modal .g-recaptcha{margin:14px 0;}
-    .close-btn{
-      background:#ccc;
-      border:none;
-      padding:8px 12px;
-      border-radius:var(--radius);
-      cursor:pointer;
-    }
+    .cta[disabled]{opacity:.6; cursor:not-allowed}
+    footer{margin-top:24px; text-align:center; font-size:13px; color:#64748b}
+    footer a{color:var(--primary); text-decoration:none; margin:0 8px}
   </style>
 </head>
 <body>
   <header>
-    <h1>Sua Oferta Oficial</h1>
-    <p>Site seguro e verificado</p>
+    <h1>Verificação rápida</h1>
   </header>
 
-  <div class="container">
-    <div class="hero">
-      <h2>Conquiste [Benefício Principal] Hoje Mesmo</h2>
-      <p>Oferta exclusiva e limitada. Aproveite agora para garantir seu acesso com segurança.</p>
-      <button id="openModal" class="cta-btn">Quero Aproveitar</button>
-    </div>
+  <main class="wrap">
+    <section class="card" aria-label="verificação">
+      <p>Para continuar sua solicitação de 2ª via, confirme que você é humano.</p>
 
-    <section>
-      <h3>Por que escolher nossa oferta?</h3>
-      <div class="benefits">
-        <div class="benefit-card">
-          <strong>✔ Segurança</strong>
-          <p>Ambiente protegido com criptografia e verificação oficial.</p>
-        </div>
-        <div class="benefit-card">
-          <strong>✔ Facilidade</strong>
-          <p>Processo rápido, simples e 100% online.</p>
-        </div>
-        <div class="benefit-card">
-          <strong>✔ Garantia</strong>
-          <p>Satisfação garantida ou seu dinheiro de volta.</p>
-        </div>
-      </div>
+      <!-- IMPORTANTE:
+           Substitua YOUR_SITE_KEY pela sua site key real do reCAPTCHA v2 (checkbox) registrada no SEU DOMÍNIO.
+           O formulário faz POST para /go (rota do seu servidor) que deverá:
+            1) Verificar o token no backend com a secret key.
+            2) Se válido, responder 302 Location: https://sua-oferta.com (ou sua rota interna).
+            3) Se inválido, retornar 400/422 com mensagem de erro.
+      -->
+      <form id="verifyForm" action="/go" method="POST" style="margin-top:10px">
+        <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
+
+        <!-- Exemplo: o backend pode exigir um campo opcional para CSRF ou tracking.
+             <input type="hidden" name="csrf" value="..."> -->
+
+        <button id="prosseguir" class="cta" type="submit" disabled>Prosseguir</button>
+      </form>
+
+      <p id="msg" role="status" aria-live="polite" style="display:none;">Verificando…</p>
     </section>
 
-    <section>
-      <h3>Perguntas Frequentes</h3>
-      <div class="faq">
-        <div>
-          <strong>É seguro?</strong>
-          <p>Sim, todo o processo é criptografado e verificado por parceiros confiáveis.</p>
-        </div>
-        <div>
-          <strong>Quanto tempo leva?</strong>
-          <p>O acesso é liberado imediatamente após a verificação.</p>
-        </div>
-      </div>
-    </section>
-  </div>
+    <footer>
+      <a href="/politica-de-privacidade" rel="nofollow">Política de Privacidade</a> |
+      <a href="/termos-de-uso" rel="nofollow">Termos de Uso</a> |
+      <a href="/contato" rel="nofollow">Contato</a>
+    </footer>
+  </main>
 
-  <footer>
-    <a href="#">Política de Privacidade</a> |
-    <a href="#">Termos de Uso</a> |
-    <a href="#">Contato</a>
-  </footer>
-
-  <!-- Modal reCAPTCHA -->
-  <div id="modal" class="modal-backdrop">
-    <div class="modal">
-      <h3>Verificação rápida</h3>
-      <p>Complete o captcha para prosseguir com sua solicitação.</p>
-      <div class="g-recaptcha"
-           data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
-           data-callback="onCaptchaClientSuccess"
-           data-expired-callback="onCaptchaExpired"></div>
-      <button id="prosseguir" class="cta-btn" disabled>Prosseguir</button><br><br>
-      <button class="close-btn" id="closeModal">Cancelar</button>
-    </div>
-  </div>
-
+  <!-- reCAPTCHA v2 -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script>
-    let OFFER_URL = "https://sua-oferta.com"; // Troque pela sua URL final
-    const modal = document.getElementById("modal");
-    const openModalBtn = document.getElementById("openModal");
-    const closeModalBtn = document.getElementById("closeModal");
-    const goBtn = document.getElementById("prosseguir");
-    let captchaOK = false;
+    // Habilita o botão apenas quando há um token válido no widget
+    // Para v2 (checkbox), não há callback automático de enabling,
+    // então observamos a presença do input hidden "g-recaptcha-response"
+    // preenchido pelo script do Google.
+    (function(){
+      const btn = document.getElementById('prosseguir');
+      const form = document.getElementById('verifyForm');
+      const msg  = document.getElementById('msg');
 
-    openModalBtn.addEventListener("click", ()=>modal.classList.add("show"));
-    closeModalBtn.addEventListener("click", ()=>modal.classList.remove("show"));
-
-    window.onCaptchaClientSuccess = function(){
-      captchaOK = true;
-      goBtn.disabled = false;
-    };
-    window.onCaptchaExpired = function(){
-      captchaOK = false;
-      goBtn.disabled = true;
-    };
-
-    goBtn.addEventListener("click", ()=>{
-      if(captchaOK){
-        window.location.href = OFFER_URL;
+      function checkToken(){
+        const token = document.querySelector('textarea[name="g-recaptcha-response"]');
+        btn.disabled = !(token && token.value && token.value.trim().length > 0);
       }
-    });
+
+      // Observa mudanças no DOM para detectar quando o token é preenchido/resetado
+      const obs = new MutationObserver(checkToken);
+      obs.observe(document.body, { subtree:true, childList:true, attributes:true });
+
+      // Também checa periodicamente por segurança
+      setInterval(checkToken, 800);
+
+      // UI simples durante submit
+      form.addEventListener('submit', function(){
+        msg.style.display = 'block';
+        btn.disabled = true;
+      });
+    })();
   </script>
 </body>
 </html>
