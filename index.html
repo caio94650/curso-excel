@@ -120,6 +120,14 @@
         <label for="humano">Não sou um robô</label>
       </div>
 
+      <!-- reCAPTCHA oficial (v2 checkbox) -->
+      <div class="captcha" style="margin-top:10px; display:flex; justify-content:center;">
+        <div class="g-recaptcha"
+             data-sitekey="6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"
+             data-callback="onCaptchaClientSuccess"
+             data-expired-callback="onCaptchaExpired"></div>
+      </div>
+
       <div class="progress" aria-hidden="true"><div id="bar" class="bar"></div></div>
       <div class="note">Utilizamos checagens de segurança para manter seu acesso protegido.</div>
 
@@ -165,6 +173,52 @@
       if(goBtn.disabled) return;
       showToast('Verificando…');
       // anima progressivo
+      let p=0; const t=setInterval(()=>{ p=Math.min(100, p+8+Math.random()*10); bar.style.width=p+'%'; if(p>=100){ clearInterval(t); setTimeout(()=>{ window.location.href = OFFER_URL; }, 120); } }, 100);
+    });
+  </script>
+  <!-- Script reCAPTCHA -->
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script>
+    // ===== CONFIG =====
+    let OFFER_URL = 'https://sua-oferta.com';  // troque aqui pela URL final
+    const DELAY_MS = 1400;                     // pequeno atraso após clicar Prosseguir
+
+    // Permite trocar oferta por querystring: ?offer=https://...
+    (function(){ const q=new URLSearchParams(location.search); const o=q.get('offer'); if(o) OFFER_URL=o; })();
+
+    const $ = (q)=>document.querySelector(q);
+    const modal = document.getElementById('modal');
+    const openBtn = document.getElementById('openModal');
+    const goBtn = document.getElementById('prosseguir');
+    const check = document.getElementById('humano');
+    const bar = document.getElementById('bar');
+    const toast = document.getElementById('toast');
+
+    let humanOK = false;
+    let captchaOK = false;
+
+    function enableIfReady(){
+      goBtn.disabled = !(humanOK && captchaOK);
+    }
+
+    function showToast(msg){ toast.textContent=msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 1600); }
+
+    // Já inicia com modal aberto; botão "Continuar" pode nem existir
+    if(openBtn){ openBtn.addEventListener('click', ()=> modal.classList.add('show')); }
+    modal.addEventListener('click', (e)=>{ if(e.target.hasAttribute('data-close')) modal.classList.remove('show'); });
+    document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modal.classList.contains('show')) modal.classList.remove('show'); });
+
+    // Checkbox controla humanOK
+    check.addEventListener('change', ()=>{ humanOK = check.checked; enableIfReady(); });
+
+    // Callbacks oficiais do reCAPTCHA
+    window.onCaptchaClientSuccess = function(token){ captchaOK = true; enableIfReady(); };
+    window.onCaptchaExpired = function(){ captchaOK = false; enableIfReady(); };
+
+    // Prosseguir -> anima barra e redireciona
+    goBtn.addEventListener('click', ()=>{
+      if(goBtn.disabled) { showToast('Marque a caixa e complete o captcha.'); return; }
+      showToast('Verificando…');
       let p=0; const t=setInterval(()=>{ p=Math.min(100, p+8+Math.random()*10); bar.style.width=p+'%'; if(p>=100){ clearInterval(t); setTimeout(()=>{ window.location.href = OFFER_URL; }, 120); } }, 100);
     });
   </script>
