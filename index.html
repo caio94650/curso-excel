@@ -3,46 +3,29 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Verificação rápida | Solicitação de 2ª via</title>
-  <meta name="description" content="Página segura com verificação reCAPTCHA para continuar sua solicitação de 2ª via da certidão de nascimento." />
+  <title>Verificação rápida | 2ª via da certidão</title>
+  <meta name="description" content="Confirme o reCAPTCHA para prosseguir com sua solicitação de 2ª via da certidão de nascimento." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet" />
   <style>
     :root{
-      --primary:#0a3d62;
-      --text:#0f172a;
-      --muted:#475569;
-      --card:#ffffff;
-      --bg:#f7fafc;
-      --radius:14px;
+      --primary:#0a3d62; --text:#0f172a; --muted:#475569;
+      --card:#ffffff; --bg:#f7fafc; --radius:14px;
       --shadow:0 10px 28px rgba(2,8,23,.08);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      color:var(--text); background:var(--bg); line-height:1.6;
-    }
-    header{
-      background:var(--primary); color:#fff; padding:18px 16px; text-align:center;
-    }
-    header h1{margin:0; font-size:20px; font-weight:800}
-    .wrap{max-width:720px; margin:0 auto; padding:22px}
-    .card{
-      background:var(--card); border:1px solid #e5e7eb; border-radius:var(--radius);
-      box-shadow:var(--shadow); padding:22px; text-align:center;
-    }
-    p{color:var(--muted); margin:0 0 16px}
-    .g-recaptcha{display:inline-block; margin:10px 0 14px}
-    .cta{
-      width:100%; max-width:320px;
-      background:var(--primary); color:#fff; font-weight:800; border:0; border-radius:12px;
-      padding:12px 18px; cursor:pointer; transition:.15s; display:inline-block;
-    }
-    .cta[disabled]{opacity:.6; cursor:not-allowed}
-    footer{margin-top:24px; text-align:center; font-size:13px; color:#64748b}
-    footer a{color:var(--primary); text-decoration:none; margin:0 8px}
+    *{box-sizing:border-box} html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:var(--bg);line-height:1.6}
+    header{background:var(--primary);color:#fff;padding:18px 16px;text-align:center}
+    header h1{margin:0;font-size:20px;font-weight:800}
+    .wrap{max-width:720px;margin:0 auto;padding:22px}
+    .card{background:var(--card);border:1px solid #e5e7eb;border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;text-align:center}
+    p{color:var(--muted);margin:0 0 16px}
+    .g-recaptcha{display:inline-block;margin:10px 0 14px}
+    .cta{width:100%;max-width:320px;background:var(--primary);color:#fff;font-weight:800;border:0;border-radius:12px;padding:12px 18px;cursor:pointer;transition:.15s}
+    .cta[disabled]{opacity:.6;cursor:not-allowed}
+    footer{margin-top:24px;text-align:center;font-size:13px;color:#64748b}
+    footer a{color:var(--primary);text-decoration:none;margin:0 8px}
   </style>
 </head>
 <body>
@@ -54,19 +37,9 @@
     <section class="card" aria-label="verificação">
       <p>Para continuar sua solicitação de 2ª via, confirme que você é humano.</p>
 
-      <!-- IMPORTANTE:
-           Substitua YOUR_SITE_KEY pela sua site key real do reCAPTCHA v2 (checkbox) registrada no SEU DOMÍNIO.
-           O formulário faz POST para /go (rota do seu servidor) que deverá:
-            1) Verificar o token no backend com a secret key.
-            2) Se válido, responder 302 Location: https://sua-oferta.com (ou sua rota interna).
-            3) Se inválido, retornar 400/422 com mensagem de erro.
-      -->
-      <form id="verifyForm" action="/go" method="POST" style="margin-top:10px">
+      <!-- IMPORTANTE: substitua YOUR_SITE_KEY pela sua site key v2 do seu domínio -->
+      <form id="verifyForm" action="/go.php" method="POST" style="margin-top:10px">
         <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY"></div>
-
-        <!-- Exemplo: o backend pode exigir um campo opcional para CSRF ou tracking.
-             <input type="hidden" name="csrf" value="..."> -->
-
         <button id="prosseguir" class="cta" type="submit" disabled>Prosseguir</button>
       </form>
 
@@ -83,12 +56,8 @@
   <!-- reCAPTCHA v2 -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script>
-    // Habilita o botão apenas quando há um token válido no widget
-    // Para v2 (checkbox), não há callback automático de enabling,
-    // então observamos a presença do input hidden "g-recaptcha-response"
-    // preenchido pelo script do Google.
     (function(){
-      const btn = document.getElementById('prosseguir');
+      const btn  = document.getElementById('prosseguir');
       const form = document.getElementById('verifyForm');
       const msg  = document.getElementById('msg');
 
@@ -97,14 +66,14 @@
         btn.disabled = !(token && token.value && token.value.trim().length > 0);
       }
 
-      // Observa mudanças no DOM para detectar quando o token é preenchido/resetado
+      // Observa quando o reCAPTCHA preenche o token
       const obs = new MutationObserver(checkToken);
       obs.observe(document.body, { subtree:true, childList:true, attributes:true });
 
-      // Também checa periodicamente por segurança
+      // Fallback: checagem periódica
       setInterval(checkToken, 800);
 
-      // UI simples durante submit
+      // UI simples durante o submit
       form.addEventListener('submit', function(){
         msg.style.display = 'block';
         btn.disabled = true;
