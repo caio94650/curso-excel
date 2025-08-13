@@ -21,12 +21,12 @@
       overflow:hidden;
     }
 
-    /* Fundo desfocado ocupando toda a tela */
+    /* Fundo desfocado ocupa toda a viewport; use sua imagem */
     .backdrop{
       position:fixed; inset:0; z-index:1;
-      background:url('https://images.unsplash.com/photo-1529078155058-5d716f45d604?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+      background:url('Design%20sem%20nome%20(4).png') center/cover no-repeat;
       filter: blur(10px) brightness(0.85);
-      transform: scale(1.05); /* evita bordas duras no blur */
+      transform: scale(1.05);
     }
     .shade{
       position:fixed; inset:0; z-index:2;
@@ -36,19 +36,17 @@
     }
 
     /* Card central */
-    .wrap{
-      position:relative; z-index:3; width:min(560px,92vw);
-    }
+    .wrap{ position:relative; z-index:3; width:min(560px,92vw); }
     .card{
-      background:var(--card);
-      border:1px solid #e5e7eb; border-radius:var(--radius);
-      padding:22px; text-align:center;
-      box-shadow:0 20px 50px rgba(2,8,23,.20);
+      background:var(--card); border:1px solid #e5e7eb; border-radius:var(--radius);
+      padding:22px; text-align:center; box-shadow:0 20px 50px rgba(2,8,23,.20);
       animation:pop .18s ease-out;
     }
     @keyframes pop{from{transform:scale(.96);opacity:.6}to{transform:scale(1);opacity:1}}
     h1{margin:0 0 6px; font-size:20px; font-weight:800}
     p{margin:0 0 16px; color:var(--muted)}
+
+    /* Botão bloqueado até o captcha liberar */
     .cta{
       margin-top:14px; display:block; width:100%;
       background:var(--primary); color:#fff; text-decoration:none; border:none;
@@ -56,13 +54,12 @@
       cursor:not-allowed; opacity:.5; transition:.2s;
     }
     .cta.ready{cursor:pointer; opacity:1;}
-    .cta.ready:hover{background:var(--primary-600);}
+    .cta.ready:hover{background:var(--primary-600);} 
+
     .trust{display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:14px; font-size:12px; color:#334155; font-weight:700}
     .chip{border:1px solid #e5e7eb; border-radius:10px; padding:8px 10px; background:#f8fafc}
 
-    /* Rodapé mínimo (opcional) */
     .foot{position:fixed; bottom:10px; left:50%; transform:translateX(-50%); z-index:3; font-size:12px; color:#475569}
-
     @media (max-width:520px){ .trust{grid-template-columns:1fr} }
   </style>
 </head>
@@ -101,32 +98,24 @@
   <!-- Script reCAPTCHA -->
   <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   <script>
-    // Callback chamado pelo reCAPTCHA quando o usuário for verificado no cliente
     function onCaptchaSuccess(token){
       const btn = document.getElementById('go');
       btn.classList.add('ready');
       btn.setAttribute('aria-disabled','false');
       btn.style.cursor = 'pointer';
-
-      // 👉 Opção 1 (rápida): redirecionar imediatamente
+      // Se quiser redirecionar automaticamente ao validar no cliente, descomente:
       // window.location.href = btn.href;
 
-      // 👉 Opção 2 (visível): liberar o botão; usuário clica para continuar
-      // (já está implementado — o link fica ativo após o sucesso)
+      // Recomendado: validar o token no seu backend e só então redirecionar.
+      // fetch('/api/recaptcha-verify', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ token })})
+      //   .then(r => r.ok ? window.location.href = btn.href : onCaptchaExpired())
     }
-
-    // Caso o token expire, desativar o botão novamente
     function onCaptchaExpired(){
       const btn = document.getElementById('go');
       btn.classList.remove('ready');
       btn.setAttribute('aria-disabled','true');
       btn.style.cursor = 'not-allowed';
     }
-
-    // (Opcional) validação real no backend:
-    // Depois do onCaptchaSuccess, envie 'token' via fetch ao seu servidor e
-    // valide com a secret key em https://www.google.com/recaptcha/api/siteverify.
-    // Se for válido, responda 200 e então faça o redirect no cliente.
   </script>
 </body>
 </html>
